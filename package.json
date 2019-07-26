@@ -1,0 +1,26 @@
+{
+  "name": "intercept",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "webpack"
+  },
+  "author": "who",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^6.4.1",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^1.15.0",
+    "webpack-dev-server": "^1.16.5"
+  },
+  "dependencies": {
+    "es3ify-webpack-plugin": "^0.1.0",
+    "react": "^0.14.9",
+    "react-dom": "^0.14.9"
+  }
+}
