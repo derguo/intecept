@@ -14,5 +14,10 @@ module.exports = {
     },
     plugins:[
         new es3ifyPlugin(),
+        new HtmlWebpackPlugin({
+          template:"./src/index.html",
+          chunks:["main"],
+          
+        })
     ]
 }
