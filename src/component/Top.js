@@ -1,4 +1,5 @@
-import React,{Component} from "react";
+import React, { Component } from 'react';
+import topcss from '../css-module/Top.css'
 
 class Top extends Component{
     constructor(props){
@@ -10,7 +11,7 @@ class Top extends Component{
 
     render(){
         return (
-            <div>
+            <div className={topcss.box}>
                 this is Top;
             </div>
         )

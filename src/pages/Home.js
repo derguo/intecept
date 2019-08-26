@@ -5,6 +5,7 @@ import Slide from "../component/Slide";
 import MainMenu from "../component/MainMenu";
 import ChildMenu from "../component/ChildMenu";
 import Foot from "../component/Foot";
+import homecss from "../css-module/Home.css"
 
 class Home extends Component {
   constructor(props){
@@ -22,7 +23,7 @@ class Home extends Component {
     return (
       <div>
         <Top />
-        <MainMenu />
+        <MainMenu style={homecss.mainmenu} />
         <Slide />
         <ChildMenu />
         <PicAndText note={this.state.note} pic="http://wan.rising.cn/" />
