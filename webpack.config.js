@@ -7,7 +7,7 @@ const packagejson = require("./package.json");
 var es3ifyPlugin = require('es3ify-webpack-plugin');
 
 module.exports = {
-    entry:["./src/main.js"],
+    entry:["./src/main_use.js"],
     output:{
        path:path.resolve(__dirname,"dist/"),
        filename:"index.js",
