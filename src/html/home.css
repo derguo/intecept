@@ -254,4 +254,14 @@ a:active {
 .purpose .ppic{margin-top: 74px;}
 .purpose .ppic img{shadow:5px 5px 5px blue}
 
+.bottombox{background: #324145;color: #fff; overflow: hidden;}
+.bottom{height: 220px;background: url(img/bottombg.png) no-repeat center;}
+.bottomlist{float: left;margin-left: 60px;margin-top: 53px;font-size: 13.5pt;}
+.bottomlist li{margin-bottom: 5px;}
+.bottomlist a{font-size: 10.5pt;color: #999999;}
+.bottomlist a:hover{color: white}
+.bottomqr{float: right;position: relative;top:100px;height: 96px;color:#999}
+.bottomqr p{bottom: 0px;position: absolute;}
+.bqrt{width: 210px;}
+
 .foot{height: 30px;line-height:30px;font-size: 10.5pt;text-align: center; background:black;color:#4c4c4c;}
