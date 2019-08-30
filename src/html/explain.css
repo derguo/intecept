@@ -263,6 +263,10 @@ a:active {
   background-position-y: -118px;
 }
 
+.childmenu a:hover{
+  background-position-y: -118px;
+}
+
 .childmenu a>p{
   position: absolute;
   bottom: 13px;
