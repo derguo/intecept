@@ -43,13 +43,13 @@
           <li  id="aql2" onclick="qie2(event)">联系合作</li>
         </ul>
         <div class="aqright">
-          <div id="lianxi">
+          <div id="lianxi" style="display: none">
             地址：xxxxxxxxxxxxx<br>
             邮编：xxxxx<br>
             总机：xxxxxxxxxxxx<br>
             客服：xxxxxxxxxxxxxxxxxxxxxxxxxxxx<br>
           </div>
-          <div id="jieshao" style="display: none">
+          <div id="jieshao">
                <p> 瑞星净屏拦截是针对加密用户文档文件进行敲诈的这一类病毒的防御软件。</p>
                <p>项目涉及的技术包括文件监控技术、行为分析技术、智能诱饵技术、文件格式分析技术、病毒分析技术。
           应用程序通过对程序的行为识别判定对文档的操作是否符合敲诈软件的行为特征，如果判定是，阻止相关程序操作，并对程序进行处理（结束进程、禁止运行）。以达到阻止这类病毒对用户文档的破获，防御已知和未知的勒索病毒对用户电脑的攻击。
@@ -83,14 +83,14 @@
   </body>
   <script>
       function qie(e){
-        document.getElementById("lianxi").style.display = "block"
-        document.getElementById("jieshao").style.display = "none"
+        document.getElementById("lianxi").style.display = "none"
+        document.getElementById("jieshao").style.display = "block"
         document.getElementById("aql2").className = "";
         e.target.className = "on"
       }
       function qie2(e){
-        document.getElementById("lianxi").style.display = "none"
-        document.getElementById("jieshao").style.display = "block"
+        document.getElementById("lianxi").style.display = "block"
+        document.getElementById("jieshao").style.display = "none"
         document.getElementById("aql1").className = "";
         e.target.className = "on"
       }
