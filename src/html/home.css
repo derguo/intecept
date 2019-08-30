@@ -135,7 +135,9 @@ a:active {
   width: 100%;
   height: 100%;
   color: #fff;
-
+}
+.mainmenu li a:hover{
+  background-color: rgb(26, 26, 26);
 }
 
 .mainmenu .on {
@@ -210,6 +212,9 @@ a:active {
   width:217px;
   height:52px;
   margin-top: 20px;
+}
+.downloadlsbtn:hover,.downloadbtn:hover{
+  background-position-y: -52px;
 }
 
 .b_dot a {

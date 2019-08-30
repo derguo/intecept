@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-x: hidden;">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="aq.css" />
+  </head>
+  <body>
+    <div class="top">
+      <div class="box_in">
+        <a class="logo" href="">
+          <img src="img/logo.png" alt="瑞星净屏拦截" />
+        </a>
+        <div class="topbtn">
+          <a class="weibo" title="扫描二维码关注微博账号">
+            <img class="weiboqr" src="img/weibo.jpg" alt="" />
+          </a>
+          <a class="weixin" title="扫描二维码关注微信公众号">
+            <img class="weixinqr" src="img/weixin.jpg" alt="" />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="mainmenu">
+      <div class="box_in">
+        <ul>
+          <li><a href="home.html">首&nbsp;&nbsp;&nbsp;页</a></li>
+          <li><a href="explain.html">使用说明</a></li>
+          <li><a href="updata.html">更新说明</a></li>
+          <li class="on"><a href="aq.html">问题反馈</a></li>
+        </ul>
+        <span class="pointer"></span>
+      </div>
+
+      <div class="line"></div>
+    </div>
+    <div class="content">
+      <div class="aq box_in">
+        <ul class="aqleft">
+          <li  id="aql1" class="on" onclick="qie(event)">关于净屏</li>
+          <li  id="aql2" onclick="qie2(event)">联系合作</li>
+        </ul>
+        <div class="aqright">
+          <div id="lianxi">
+            地址：xxxxxxxxxxxxx<br>
+            邮编：xxxxx<br>
+            总机：xxxxxxxxxxxx<br>
+            客服：xxxxxxxxxxxxxxxxxxxxxxxxxxxx<br>
+          </div>
+          <div id="jieshao" style="display: none">
+               <p> 瑞星净屏拦截是针对加密用户文档文件进行敲诈的这一类病毒的防御软件。</p>
+               <p>项目涉及的技术包括文件监控技术、行为分析技术、智能诱饵技术、文件格式分析技术、病毒分析技术。
+          应用程序通过对程序的行为识别判定对文档的操作是否符合敲诈软件的行为特征，如果判定是，阻止相关程序操作，并对程序进行处理（结束进程、禁止运行）。以达到阻止这类病毒对用户文档的破获，防御已知和未知的勒索病毒对用户电脑的攻击。
+          <p>瑞星个人产品服务电话：010-82678866-890 
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottombox">
+      <div class="bottom box_in">
+        <ul class="bottomlist">
+          <li>首页</li>
+          <li><a>使用说明</a></li>
+          <li><a>更新说明</a></li>
+          <li><a>问题反馈</a></li>
+        </ul>
+        <ul class="bottomlist">
+          <li>我们</li>
+          <li><a>关于我们</a></li>
+          <li><a>联系我们</a></li>
+        </ul>
+        <div class="bottomqr">
+          <img src="img/weixin.jpg" alt="瑞星净屏拦截" />
+        </div>
+        <div class="bottomqr bqrt">
+          <p>新浪微博：@瑞星净屏拦截<br />官方微信：瑞星净屏拦截</p>
+        </div>
+      </div>
+    </div>
+    <div class="foot">@ rising.cn 瑞星网安 京ICP备08104897</div>
+  </body>
+  <script>
+      function qie(e){
+        document.getElementById("lianxi").style.display = "block"
+        document.getElementById("jieshao").style.display = "none"
+        document.getElementById("aql2").className = "";
+        e.target.className = "on"
+      }
+      function qie2(e){
+        document.getElementById("lianxi").style.display = "none"
+        document.getElementById("jieshao").style.display = "block"
+        document.getElementById("aql1").className = "";
+        e.target.className = "on"
+      }
+  </script>
+</html>

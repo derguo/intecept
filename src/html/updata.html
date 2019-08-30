@@ -26,10 +26,10 @@
     <div class="mainmenu">
       <div class="box_in">
         <ul>
-            <li><a href="home.html">首&nbsp;&nbsp;&nbsp;页</a></li>
-            <li class="on"><a href="explain.html">使用说明</a></li>
-            <li><a>更新说明</a></li>
-            <li><a>问题反馈</a></li>
+          <li><a href="home.html">首&nbsp;&nbsp;&nbsp;页</a></li>
+          <li><a href="explain.html">使用说明</a></li>
+          <li class="on"><a href="updata.html">更新说明</a></li>
+          <li><a href="aq.html">问题反馈</a></li>
         </ul>
         <span class="pointer"></span>
       </div>
@@ -38,33 +38,66 @@
     </div>
     <div class="content">
       
-      <ul class="updata box_in">
-        <li>
-          <p class="utitle">净屏拦截正式版v2.5</p>
-          <p class="utime">更新时间：2019.1.1</p>
-          <p class="utip">功能新特性：</p>
-          <p class="ucontent">
-            1.xxxxxxxxxxxxxxxxxx<br>
-            2.xxxxxxxxxxxxxxxxxx<br>
-            3.xxxxxxxxxxxxxxxxxx<br>
-            4.xxxxxxxxxxxxxxxxxx<br>
-            5.xxxxxxxxxxxxxxxxxx<br>
-          </p>
-        </li>
+      <div class="updata box_in">
+          <div class="ubdatatitle">更新说明</div>
+        <ul id="uuu" class="">
+          <li>
+            <p class="utitle">净屏拦截正式版v2.5</p>
+            <p class="utime">更新时间：2019.1.1</p>
+            <p class="utip">功能新特性：</p>
+            <p class="ucontent">
+              1.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+              2.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+              3.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+              4.xxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+              5.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+            </p>
+          </li>
 
-        <li>
-          <p class="utitle">净屏拦截正式版v2.5</p>
-          <p class="utime">更新时间：2019.1.1</p>
-          <p class="utip">功能新特性：</p>
-          <p class="ucontent">
-            1.xxxxxxxxxxxxxxxxxx<br>
-            2.xxxxxxxxxxxxxxxxxx<br>
-            3.xxxxxxxxxxxxxxxxxx<br>
-            4.xxxxxxxxxxxxxxxxxx<br>
-            5.xxxxxxxxxxxxxxxxxx<br>
-          </p>
-        </li>
-      </ul>
+          <li>
+              <p class="utitle">净屏拦截正式版v2.5</p>
+              <p class="utime">更新时间：2019.1.1</p>
+              <p class="utip">功能新特性：</p>
+              <p class="ucontent">
+                1.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+                2.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+                3.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+                4.xxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+                5.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+              </p>
+            </li>
+
+            <li>
+                <p class="utitle">净屏拦截正式版v2.5</p>
+                <p class="utime">更新时间：2019.1.1</p>
+                <p class="utip">功能新特性：</p>
+                <p class="ucontent">
+                  1.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+                  2.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+                  3.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+                  4.xxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+                  5.xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx<br />
+                </p>
+              </li>
+
+          <li class="end">
+            <p class="utitle">净屏拦截正式版v2.5</p>
+            <p class="utime">更新时间：2019.1.1</p>
+            <p class="utip">功能新特性：</p>
+            <p class="ucontent">
+              1.xxxxxxxxxxxxxxxxxx<br />
+              2.xxxxxxxxxxxxxxxxxx<br />
+              3.xxxxxxxxxxxxxxxxxx<br />
+              4.xxxxxxxxxxxxxxxxxx<br />
+              5.xxxxxxxxxxxxxxxxxx<br />
+            </p>
+          </li>
+        </ul>
+        <div id="more" onclick="qie(event)" class="box_in">
+          <span id="gdt" class="gengduotext">展开查看更多</span>
+          <div id="gdb" class="gengduo"><span></span></div>
+        </div>
+      </div>
     </div>
     <div class="bottombox">
       <div class="bottom box_in">
@@ -80,15 +113,30 @@
           <li><a>联系我们</a></li>
         </ul>
         <div class="bottomqr">
-            <img src="img/weixin.jpg" alt="瑞星净屏拦截">
+          <img src="img/weixin.jpg" alt="瑞星净屏拦截" />
         </div>
         <div class="bottomqr bqrt">
-          <p>新浪微博：@瑞星净屏拦截<br>官方微信：瑞星净屏拦截</p>
-          
+          <p>新浪微博：@瑞星净屏拦截<br />官方微信：瑞星净屏拦截</p>
         </div>
-        
       </div>
     </div>
     <div class="foot">@ rising.cn 瑞星网安 京ICP备08104897</div>
   </body>
+  <script>
+    document.getElementById("uuu").style.height = "290px"
+    var i = 1;
+    function qie(e) {
+      if(i == 1){
+        document.getElementById("gdb").className = "gengduo xiangshang";
+        document.getElementById("gdt").innerText = "返回顶部"
+        document.getElementById("uuu").style.height = ""
+        i =2;
+      }else if(i == 2){
+        document.getElementById("gdb").className = "gengduo";
+        document.getElementById("gdt").innerText = "展开查看更多"
+        document.getElementById("uuu").style.height = "290px"
+        i = 1;
+      }
+    }
+  </script>
 </html>
