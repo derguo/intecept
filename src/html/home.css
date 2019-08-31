@@ -213,6 +213,9 @@ a:active {
   height:52px;
   margin-top: 20px;
 }
+.downloadlsbtn:hover{
+  background-color: #47c7c7
+}
 .downloadlsbtn:hover,.downloadbtn:hover{
   background-position-y: -52px;
 }
@@ -244,7 +247,7 @@ a:active {
   position: absolute;
   width: 100%;
   height: 891px;
-  background: url(img/cbg.png) no-repeat center -95px;
+  background: url(img/cbg.png) no-repeat center -142px;
 }
 
 
