@@ -5,35 +5,37 @@ import Slide from "../component/Slide";
 import MainMenu from "../component/MainMenu";
 import ChildMenu from "../component/ChildMenu";
 import Foot from "../component/Foot";
-import homecss from "../css-module/Home.css"
+import homecss from "../css-module/Home.css";
 
 class Home extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      note:[
+      note: [
         {
-          title:"说明",
-          contents:["第一段","第二段"]
+          title: "说明",
+          contents: ["第一段", "第二段"]
         }
       ]
-    }
+    };
   }
   render() {
     return (
       <div>
-        <Top />
+        <div className={homecss.box}>
+          <div className={homecss.box_in}>
+            <Top />
+          </div>
+        </div>
+        {/* 
         <MainMenu style={homecss.mainmenu} />
         <Slide />
         <ChildMenu />
         <PicAndText note={this.state.note} pic="http://wan.rising.cn/" />
         <PicAndText />
-        <Foot />
-
+        <Foot /> */}
       </div>
     );
   }
 }
 export default Home;
-
-

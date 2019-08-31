@@ -1,2 +1,11 @@
-.mainmenu{background-color: yellow;}
-.box{color: yellowgreen;}
+.box{
+    overflow: hidden;
+    background-color: aquamarine;
+}
+
+.box_in{
+    position: relative;
+    margin: 0 auto;
+    width:1200px;
+    background-color: chartreuse;
+}
