@@ -135,11 +135,11 @@ a:active {
   width: 100%;
   height: 100%;
   color: #fff;
+
 }
 .mainmenu li a:hover{
   background-color: rgb(26, 26, 26);
 }
-
 .mainmenu .on {
   background-color: black;
 }
@@ -154,7 +154,7 @@ a:active {
     width: 12px;
     height:7px;
     bottom: 0px;
-    left: 124px;
+    left: 314px;
     color: #3FB0B1;
     background: url(img/pointer.png) no-repeat;
 }
@@ -213,9 +213,6 @@ a:active {
   height:52px;
   margin-top: 20px;
 }
-.downloadlsbtn:hover,.downloadbtn:hover{
-  background-position-y: -52px;
-}
 
 .b_dot a {
   display: inline-block;
@@ -238,15 +235,12 @@ a:active {
   width: 1200px;
   margin: 0 auto;
 }
-
-
 .slfebg{
   position: absolute;
   width: 100%;
   height: 891px;
   background: url(img/cbg.png) no-repeat center -95px;
 }
-
 
 .childmenu{
   height: 95px;
@@ -268,6 +262,14 @@ a:active {
   background: url(img/cmenubtn.png) no-repeat;
   cursor: pointer;
   
+}
+
+.childmenu .on{
+  background-position-y: -118px;
+}
+
+.childmenu a:hover{
+  background-position-y: -118px;
 }
 
 .childmenu a>p{

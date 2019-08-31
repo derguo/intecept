@@ -135,11 +135,11 @@ a:active {
   width: 100%;
   height: 100%;
   color: #fff;
+
 }
 .mainmenu li a:hover{
   background-color: rgb(26, 26, 26);
 }
-
 .mainmenu .on {
   background-color: black;
 }
@@ -154,7 +154,7 @@ a:active {
     width: 12px;
     height:7px;
     bottom: 0px;
-    left: 124px;
+    left: 694px;
     color: #3FB0B1;
     background: url(img/pointer.png) no-repeat;
 }
@@ -213,9 +213,6 @@ a:active {
   height:52px;
   margin-top: 20px;
 }
-.downloadlsbtn:hover,.downloadbtn:hover{
-  background-position-y: -52px;
-}
 
 .b_dot a {
   display: inline-block;
@@ -240,14 +237,6 @@ a:active {
 }
 
 
-.slfebg{
-  position: absolute;
-  width: 100%;
-  height: 891px;
-  background: url(img/cbg.png) no-repeat center -95px;
-}
-
-
 .childmenu{
   height: 95px;
   padding: 32px 0;
@@ -268,6 +257,10 @@ a:active {
   background: url(img/cmenubtn.png) no-repeat;
   cursor: pointer;
   
+}
+
+.childmenu .on{
+  background-position-y: -118px;
 }
 
 .childmenu a>p{
@@ -306,3 +299,27 @@ a:active {
 .bqrt{width: 210px;}
 
 .foot{height: 30px;line-height:30px;font-size: 10.5pt;text-align: center; background:black;color:#4c4c4c;}
+
+.ubdatatitle{height: 100px;line-height: 100px;; font-size: 18.5pt;padding-left: 70px;}
+.updata{padding-bottom: 70px; background-color: white}
+.updata ul{padding-left: 103px;}
+.updata li{padding:0px 0px 50px 0px; background: url(img/quanl.png) repeat-y;} 
+.updata .end{background: none;}
+.updata .end .utitle{background: url(img/quane.png) no-repeat bottom left;}
+.updata p{padding-left: 35px;}
+.updata .utitle{font-size: 13.5pt; color: #43848f;margin-bottom: 5px;background: url(img/quan.png) no-repeat;}
+.updata .utime{font-size: 10.5pt; color:#727272;margin-bottom: 15px;line-height: 22.5pt;}
+.updata .utip{font-size: 10.5pt; color:#444444;}
+.updata .ucontent{color:#646464;line-height: 22.5pt;}
+.content{background: #e1e7eb}
+.gengduo{position: relative;margin: 0 auto;width: 1000px; height: 23px; background: url(img/bottomline.png)}
+.gengduo span{display: block;position: relative;margin: 0 auto; width: 23px; height: 23px;background: url(img/bottombtn1.png);cursor: pointer;}
+.gengduotext{display:block;font-size: 10.5px; color: #646464;text-align: center}
+
+.content{background: #e9eef3; overflow: hidden;}
+.aq{overflow: hidden; padding: 40px;margin: 40px auto;;width: 1120px;background: white}
+.aq .aqleft,.aq .aqright{float: left;}
+.aq .aqleft{width: 240px;font-size: 14pt;color: #444;text-align: center;}
+.aq .aqleft li{height: 36px;line-height: 36px;margin-bottom: 10px;cursor: pointer;}
+.aq .aqleft .on{background: url(img/aqbtn.png) no-repeat center;}
+.aq .aqright{max-width: 800px;min-height: 430px;line-height: 36px; padding-left: 50px;border-left: solid 1px #e9eef3;font-size: 10.5pt;color: #646464}
