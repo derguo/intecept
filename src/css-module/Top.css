@@ -1,6 +1,56 @@
-.box{
-    height: 30px;
-    line-height: 30px;
-    background-color: black;
-    color: white;
-}
+.top {
+    background-color: #324145;
+    height: 70px;
+    color: #f0f0f0;
+    *position: relative;
+    *z-index: 20;
+  }
+  
+  .top a {
+    color: #f0f0f0;
+    display: inline-block;
+    height: 70px;
+  }
+  .topbtn {
+    float: right;
+    width: 196px;
+    height: 70px;
+    position: relative;
+  }
+  .topbtn a{
+    position: absolute;
+    width: 98px;
+    height: 70px;
+    background: url(../html/img/topbtn.png) no-repeat;
+    overflow: hidden;
+    z-index: 10;
+  }
+  .topbtn a > img {
+    position: absolute;
+    width: 98px;
+    height: 98px;
+    z-index: 1;
+    top: 70px;
+  }
+  .topbtn .weibo{
+    background-position-x: -196px;
+  }
+  .topbtn .weixin{
+    left: 98px;
+  }
+  
+  .topbtn .weibo:hover{
+    overflow: inherit;
+    *overflow: visible;
+    background-position-x: -294px;
+  }
+  .topbtn .weixin:hover{
+    overflow: inherit;
+    *overflow: visible;
+    background-position-x: -98px;
+  }
+
+  .logo {
+    float: left;
+  }
+  

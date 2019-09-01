@@ -27,6 +27,12 @@ class Home extends Component {
             <Top />
           </div>
         </div>
+        <div className={homecss.box}>
+          <div className={homecss.box_in}>
+            <MainMenu />
+          </div>
+        </div>
+
         {/* 
         <MainMenu style={homecss.mainmenu} />
         <Slide />

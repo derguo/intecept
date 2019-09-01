@@ -11,6 +11,7 @@ module.exports = {
     output:{
        path:path.resolve(__dirname,"dist/"),
        filename:"index.js",
+       publicPath:"http://localhost:8080/"
        //vendor: Object.keys(packagejson.dependencies)//获取生产环境依赖的库
     
     },
@@ -20,6 +21,11 @@ module.exports = {
                 test: /\.css$/,
                 loader: "style-loader!css-loader?modules"
             },
+            {
+                test: /\.(gif|png|jpe?g|eot|woff|ttf|svg|pdf)$/,
+                loader:'url-loader?limit=100&name=images/[name]_[hash:7].[ext]',
+
+              },
             {test: /\.js$/, exclude:/node_modules/, loader: 'babel-loader'},
         ]
     },
