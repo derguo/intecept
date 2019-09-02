@@ -3,23 +3,29 @@ const path = require("path");
 const HtmlWebpackExternalsPlugin = require('html-webpack-externals-plugin');
 const webpack = require("webpack");
 const packagejson = require("./package.json");
-
-var es3ifyPlugin = require('es3ify-webpack-plugin');
+const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
+const es3ifyPlugin = require('es3ify-webpack-plugin');
 
 module.exports = {
     entry:["./src/main_use.js"],
+    entry:{
+        app:"./src/main_use.js",
+        react:["react"],
+        reactDom:["react-dom"],
+
+    },
     output:{
        path:path.resolve(__dirname,"dist/"),
-       filename:"index.js",
-       publicPath:"http://localhost:8080/"
-       //vendor: Object.keys(packagejson.dependencies)//获取生产环境依赖的库
+       filename:"[name]_[chunkhash:8].js",
+       //publicPath:"http://localhost:8080/"
+       vendor: Object.keys(packagejson.dependencies)//获取生产环境依赖的库
     
     },
     module:{
         loaders:[
             {
                 test: /\.css$/,
-                loader: "style-loader!css-loader?modules"
+                loader: ExtractTextWebpackPlugin.extract("style-loader", "css-loader")//"style-loader!css-loader?modules"
             },
             {
                 test: /\.(gif|png|jpe?g|eot|woff|ttf|svg|pdf)$/,
@@ -33,13 +39,13 @@ module.exports = {
         new es3ifyPlugin(),
         new HtmlWebpackPlugin({
           template:"./src/index.html",
-          chunks:["main"],
+          chunks:["app","react","reactDom","runtime"],
           
         }),
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name:"vendor",
-        //     filename:"[name].js"
-        // })
-        
+        new webpack.optimize.CommonsChunkPlugin({
+            name:["react","reactDom",'runtime'],
+            filename:"[name]_[chunkhash:8].js"
+        }),
+        new ExtractTextWebpackPlugin("css/[name].css"),
     ]
 }

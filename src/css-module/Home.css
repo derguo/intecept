@@ -1,8 +1,1 @@
-.box{}
-/* .box:after{content:""; display:block; clear:both;} */
-
-.box_in{
-    position: relative;
-    margin: 0 auto;
-    width:1200px;
-}
+.top{background-color: #324145;}

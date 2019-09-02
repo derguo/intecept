@@ -8,10 +8,10 @@ class MainMenu extends Component {
 
   render() {
     return (
-      <div class="mainmenu">
-        <div class="box_in">
+      <div className="mainmenu">
+        <div className="box_in">
           <ul>
-            <li class="on">
+            <li className="on">
               <a href="home.html">首&nbsp;&nbsp;&nbsp;页</a>
             </li>
             <li>
@@ -24,10 +24,10 @@ class MainMenu extends Component {
               <a href="aq.html">问题反馈</a>
             </li>
           </ul>
-          <span class="pointer"></span>
+          <span className="pointer"></span>
         </div>
 
-        <div class="line"></div>
+        <div className="line"></div>
       </div>
     );
   }

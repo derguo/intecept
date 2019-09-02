@@ -6,6 +6,7 @@ import MainMenu from "../component/MainMenu";
 import ChildMenu from "../component/ChildMenu";
 import Foot from "../component/Foot";
 import homecss from "../css-module/Home.css";
+import Box from "../component/containers/LayoutContainer"
 
 class Home extends Component {
   constructor(props) {
@@ -22,17 +23,12 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <div className={homecss.box}>
-          <div className={homecss.box_in}>
-            <Top />
-          </div>
-        </div>
-        <div className={homecss.box}>
-          <div className={homecss.box_in}>
-            <MainMenu />
-          </div>
-        </div>
-
+        <Box className={homecss.top}>
+          <Top />
+        </Box>
+        <Box>
+            <MainMenu /><MainMenu /><div>aaa</div>
+        </Box>
         {/* 
         <MainMenu style={homecss.mainmenu} />
         <Slide />
