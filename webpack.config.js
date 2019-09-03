@@ -5,6 +5,8 @@ const webpack = require("webpack");
 const packagejson = require("./package.json");
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 const es3ifyPlugin = require('es3ify-webpack-plugin');
+const uglify = require('uglifyjs-webpack-plugin');
+
 const my = require("./my-webpack-plugin");
 
 module.exports = {
@@ -22,6 +24,7 @@ module.exports = {
        filename:"js/[name]_[chunkhash:8].js",
        //publicPath:"http://localhost:8080/"
     },
+    mode:"production",
     module:{
         loaders:[
             {
@@ -48,6 +51,7 @@ module.exports = {
             name:["react","reactDom","polyfill"],
             filename:"js/[name].js"
         }),
+        new uglify(),
         //new ExtractTextWebpackPlugin("css/[name].css"),
         //new my(),
     ]
