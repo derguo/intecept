@@ -27,7 +27,7 @@ class Home extends Component {
           <Top />
         </Box>
         <Box>
-            <MainMenu /><MainMenu /><div>aaa</div>
+            <MainMenu /><MainMenu /><div>aaaaaaaaa</div>
         </Box>
         {/* 
         <MainMenu style={homecss.mainmenu} />

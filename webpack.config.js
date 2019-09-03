@@ -5,6 +5,7 @@ const webpack = require("webpack");
 const packagejson = require("./package.json");
 const ExtractTextWebpackPlugin = require("extract-text-webpack-plugin");
 const es3ifyPlugin = require('es3ify-webpack-plugin');
+const my = require("./my-webpack-plugin");
 
 module.exports = {
     entry:["./src/main_use.js"],
@@ -12,6 +13,7 @@ module.exports = {
         app:"./src/main_use.js",
         react:["react"],
         reactDom:["react-dom"],
+        polyfill:["babel-polyfill"],
 
     },
     output:{
@@ -25,7 +27,8 @@ module.exports = {
         loaders:[
             {
                 test: /\.css$/,
-                loader: ExtractTextWebpackPlugin.extract("style-loader", "css-loader")//"style-loader!css-loader?modules"
+                loader: "style-loader!css-loader?modules",
+                //ExtractTextWebpackPlugin.extract("style-loader", "css-loader"),//
             },
             {
                 test: /\.(gif|png|jpe?g|eot|woff|ttf|svg|pdf)$/,
@@ -39,13 +42,14 @@ module.exports = {
         new es3ifyPlugin(),
         new HtmlWebpackPlugin({
           template:"./src/index.html",
-          chunks:["app","react","reactDom","runtime"],
+          chunks:["app","react","reactDom","polyfill"],
           
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name:["react","reactDom",'runtime'],
-            filename:"[name]_[chunkhash:8].js"
+            name:["react","reactDom","polyfill"],
+            filename:"[name].js"
         }),
-        new ExtractTextWebpackPlugin("css/[name].css"),
+        //new ExtractTextWebpackPlugin("css/[name].css"),
+        new my(),
     ]
 }
