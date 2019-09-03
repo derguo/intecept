@@ -50,13 +50,10 @@ module.exports = {
       filename: "js/[name].js"
     }),
     // new uglify({
-    //     compress: {
-    //         dead_code: false,
-    //         global_defs: {
-    //             DEBUG: false
-    //         }
-    //     },
-    //     mangle:false,
+    //     output:{
+    //       comments:false,
+    //       beautify:true,
+    //     }
     // }),
     //new ExtractTextWebpackPlugin("css/[name].css"),
     //new my(),
