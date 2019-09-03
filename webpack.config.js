@@ -14,14 +14,13 @@ module.exports = {
         react:["react"],
         reactDom:["react-dom"],
         polyfill:["babel-polyfill"],
+        //vendor: Object.keys(packagejson.dependencies),
 
     },
     output:{
        path:path.resolve(__dirname,"dist/"),
-       filename:"[name]_[chunkhash:8].js",
+       filename:"js/[name]_[chunkhash:8].js",
        //publicPath:"http://localhost:8080/"
-       vendor: Object.keys(packagejson.dependencies)//获取生产环境依赖的库
-    
     },
     module:{
         loaders:[
@@ -47,9 +46,9 @@ module.exports = {
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name:["react","reactDom","polyfill"],
-            filename:"[name].js"
+            filename:"js/[name].js"
         }),
         //new ExtractTextWebpackPlugin("css/[name].css"),
-        new my(),
+        //new my(),
     ]
 }
