@@ -10,9 +10,12 @@ class MainMenu extends Component {
     return (
       <div className="mainmenu">
         <div className="box_in">
-          <ul>
+          <ul onClick={this.choosePage.bind(this)}>
             <li className="on">
-              <a href="home.html">首&nbsp;&nbsp;&nbsp;页</a>
+              <a href="" 
+                 ref={(homeBtn) => {this.homeBtn = homeBtn}}
+                 
+              >首&nbsp;&nbsp;&nbsp;页</a>
             </li>
             <li>
               <a href="explain.html">使用说明</a>
@@ -30,6 +33,10 @@ class MainMenu extends Component {
         <div className="line"></div>
       </div>
     );
+  }
+
+  choosePage(e){
+    console.log("e",e.target.text);
   }
 }
 
