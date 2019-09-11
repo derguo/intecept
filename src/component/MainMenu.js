@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
+import Mmcss from "../css-module/MainMenu.css"
 
 class MainMenu extends Component {
   constructor(props) {
@@ -9,7 +10,6 @@ class MainMenu extends Component {
   render() {
     return (
       <div className="mainmenu">
-        <div className="box_in">
           <ul onClick={this.choosePage.bind(this)}>
             <li className="on">
               <a href="" 
@@ -28,9 +28,6 @@ class MainMenu extends Component {
             </li>
           </ul>
           <span className="pointer"></span>
-        </div>
-
-        <div className="line"></div>
       </div>
     );
   }

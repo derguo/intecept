@@ -23,11 +23,11 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Box className={homecss.top}>
+        <Box className="topbg">
           <Top />
         </Box>
-        <Box>
-            <MainMenu /><MainMenu /><div>aaaaaaaaa</div>
+        <Box className="mainmenubg">
+            <MainMenu />
         </Box>
         {/* 
         <MainMenu style={homecss.mainmenu} />

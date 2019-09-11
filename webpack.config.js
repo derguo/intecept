@@ -21,16 +21,17 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, "dist/"),
-    filename: "js/[name]_[chunkhash:8].js"
-    //publicPath:"http://localhost:8080/"
+    filename: "js/[name]_[chunkhash:8].js",
+    //publicPath:"../"//"http://localhost:8080/",
+    publicPath:"/"
   },
   mode: "production",
   module: {
     loaders: [
       {
         test: /\.css$/,
-        loader: "style-loader!css-loader?modules"
-        //ExtractTextWebpackPlugin.extract("style-loader", "css-loader"),//
+        loader: //"style-loader!css-loader?modules"
+        ExtractTextWebpackPlugin.extract("style-loader", "css-loader"),//
       },
       {
         test: /\.(gif|png|jpe?g|eot|woff|ttf|svg|pdf)$/,
@@ -55,7 +56,7 @@ module.exports = {
     //       beautify:true,
     //     }
     // }),
-    //new ExtractTextWebpackPlugin("css/[name].css"),
+    new ExtractTextWebpackPlugin("css/[name]_[hash:8].css"),
     //new my(),
   ]
 };

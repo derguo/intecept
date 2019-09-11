@@ -11,8 +11,8 @@ class LayoutContainer extends Component {
     
     render() { 
         return ( 
-            <div className={homecss.box + " "+ this.className}>
-                <div className={homecss.box_in}>
+            <div className={"box "+ this.className}>
+                <div className="box_in">
                     {
                         this.props.children ? this.props.children : ""                       
                     }

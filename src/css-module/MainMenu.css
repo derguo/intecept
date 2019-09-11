@@ -1,0 +1,51 @@
+
+.mainmenu {
+    height: 44px;
+    color: #ccc;
+    background-color: #2f2d2d;
+  }
+  
+  .mainmenu ul {
+    overflow: hidden;
+    height: 42px;
+    position: relative;
+  }
+  .mainmenu li {
+    float: left;
+    width: 120px;
+    height: 42px;
+    font-size: 13.5pt;
+    line-height: 42px;
+    text-align: center;
+    margin-left: 70px;
+    cursor: pointer;
+  }
+  .mainmenu li a{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+  }
+  .mainmenu li a:hover{
+    background-color: rgb(26, 26, 26);
+  }
+  
+  .mainmenu .on {
+    background-color: black;
+  }
+  
+  .mainmenu .pointer{
+      display: inline-block;
+      position: absolute;
+      width: 12px;
+      height:7px;
+      bottom: 0px;
+      left: 124px;
+      color: #3FB0B1;
+      background: url(../html/img/pointer.png) no-repeat;
+  }
+  
+  .logo {
+    float: left;
+  }
+  

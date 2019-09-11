@@ -1,6 +1,8 @@
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, input, textarea, p, th, td { margin: 0; padding: 0; }
 ul, ol, menu { list-style: none; }
-body{font-family:\601D\6E90\9ED1\4F53,Verdana,arial,\5B8B\4F53;_font-family:\601D\6E90\9ED1\4F53,\5B8B\4F53;}
+body{font-family: \5fae\8f6f\96c5\9ed1;
+    _font-family: \5fae\8f6f\96c5\9ed1;
+    color: #373737;}
 img { border: none; }
 a { text-decoration: none; cursor: pointer; }
 a:link { color: #393939; text-decoration: none; }
