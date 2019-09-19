@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import Mmcss from "../css-module/MainMenu.css"
+import { Router, Route, Link, browserHistory } from 'react-router'
 
 class MainMenu extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class MainMenu extends Component {
             <li>
               <a href="aq.html">问题反馈</a>
             </li>
+            <li><Link to="/inbox">Inbox</Link></li>
           </ul>
           <span className="pointer"></span>
       </div>
@@ -36,5 +38,7 @@ class MainMenu extends Component {
     console.log("e",e.target.text);
   }
 }
+
+
 
 export default MainMenu;

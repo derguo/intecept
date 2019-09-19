@@ -7,6 +7,7 @@ import ChildMenu from "../component/ChildMenu";
 import Foot from "../component/Foot";
 import homecss from "../css-module/Home.css";
 import Box from "../component/containers/LayoutContainer"
+import { Router, Route, Link, browserHistory } from 'react-router'
 
 class Home extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+        {this.props.children || "Welcome to your Inbox"}
         <Box className="topbg">
           <Top />
         </Box>

@@ -21,6 +21,7 @@ class Top extends Component {
               <img className="weixinqr" src={require("../html/img/weixin.jpg")} alt="" />
             </a>
           </div>
+          
       </div>
     );
   }
