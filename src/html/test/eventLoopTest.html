@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button onClick="oc(event)">ok</button>
+    <i id="ttt">i</i>
+    <script>
+        console.log("start");
+        function oc(e){
+            console.log("click",e);
+        }
+
+        setTimeout(() => {
+            console.log("settimeout");
+        }, 0);
+
+        for(var i =0; i< 100; i++){
+            document.getElementById("ttt").innerText = "<button>"+i+"</button>";
+        }
+
+        new Promise(function(resolve,reject){
+            resolve("ok");
+        }).then(function(){
+            console.log("promise");
+        })
+        new Promise(function(resolve,reject){
+            resolve("ok");
+        }).then(function(){
+            console.log("promise");
+        })
+    </script>
+
+    <script>
+        console.log("other script");
+    </script>
+</body>
+</html>

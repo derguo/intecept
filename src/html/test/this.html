@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // //严格模式下的，简单对象内部方法的this
+        "use strict"
+        // var a = "globle"
+        // var obj = {
+        //     a:"obj",
+        //     f1:function(){
+        //         console.log(this);
+        //     }
+        // }
+
+        // obj.f1();
+
+        // var f = obj.f1;
+
+        // f();
+
+        var a = "globle";
+        
+        function f(){
+            
+            this.a = "f obj";
+            // var a = "f";
+            setTimeout(() => {
+                console.log(this.a);
+            }, 2);
+        }
+
+        new f();
+        // f();
+
+        
+
+
+    </script>
+</body>
+</html>
