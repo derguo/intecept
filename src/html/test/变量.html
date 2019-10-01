@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    var a = "123";
+    console.log(a.length);
+    a.length = 5;
+    console.log(a,a.length);
+
+    var arr = [1,2,3];
+    console.log(arr);
+    arr.length = 6;
+    console.log(arr);
+
+    var arr1 = new Array(6);
+    console.log(arr1[1]);
+    arr.map(function(i){
+        console.log(i);
+    })
+
+    console.log("-----定义一个字符串对象--------");
+    var str = new String("Hh123");
+    console.log(str)
+    str.length = 6;
+    console.log(str.length);
+    console.log(str.replace("h","aaa"));
+    console.log(str);
+    </script>
+    
+    
+
+</body>
+</html>
