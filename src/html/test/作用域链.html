@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var test = "global";
+        function fun1(arg) {
+            console.log(arg, test, this);
+        }
+        var obj1 = {
+            test: "obj1",
+            f: function (arg) {
+                console.log(arg, test, this);
+            }
+        }
+
+        fun1("写在全局位置调用：   ")
+
+        function fun2(params) {
+            var test = "fun2"
+            fun1("写在fun2里调用：   ")
+            function fun3(arg) {
+                console.log(arg, test, this);
+            }
+            fun3("定义在fun2，并且在fun2里调用：   ")
+
+            var fun5 = fun1;
+            fun5("引用了fun1，并在fun2中调用：====");
+
+            obj1.f("@@@@@@@@在fun2中调用，定义在全局的对象obj1的方法 ---------");
+            var obj2 = {
+                test: "obj2",
+                f: function (arg) {
+                    console.log(arg, test, this);
+                },
+                f2:fun1
+            }
+
+            obj2.f("@@@@@@@@在fun2中调用，定义在fun2中的对象obj2的方法 ---------");
+            obj2.f2("@@@@@@@@在fun2中调用，定义在fun2中的对象obj2的方法f2 ---------");
+        }
+
+        fun2()
+
+        console.log(`
+        临时总结：作用域链，取决于函数在哪定义，在哪个作用域中定义的就能读取作用域中的变量。与在哪调用无关，因此便产生了闭包。
+        验证：箭头函数是否符合此规律
+        `);
+    </script>
+</body>
+
+</html>
