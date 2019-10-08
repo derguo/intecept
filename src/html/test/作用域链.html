@@ -14,6 +14,7 @@
         function fun1(arg) {
             console.log(arg, test, this);
         }
+        // var fun1 = (arg) => {console.log(arg, test, this);}
         var obj1 = {
             test: "obj1",
             f: function (arg) {
@@ -21,18 +22,18 @@
             }
         }
 
-        fun1("写在全局位置调用：   ")
+        fun1("写在全局位置调用fun1：   ")
 
         function fun2(params) {
             var test = "fun2"
-            fun1("写在fun2里调用：   ")
+            fun1("写在fun2里调用fun1：   ")
             function fun3(arg) {
                 console.log(arg, test, this);
             }
-            fun3("定义在fun2，并且在fun2里调用：   ")
+            fun3("定义在fun2，并且在fun2里调用fun3：   ")
 
             var fun5 = fun1;
-            fun5("引用了fun1，并在fun2中调用：====");
+            fun5("引用了fun1，并在fun2中调用fun5：====");
 
             obj1.f("@@@@@@@@在fun2中调用，定义在全局的对象obj1的方法 ---------");
             var obj2 = {
@@ -40,12 +41,43 @@
                 f: function (arg) {
                     console.log(arg, test, this);
                 },
-                f2:fun1
+                f2: fun1
             }
 
             obj2.f("@@@@@@@@在fun2中调用，定义在fun2中的对象obj2的方法 ---------");
-            obj2.f2("@@@@@@@@在fun2中调用，定义在fun2中的对象obj2的方法f2 ---------");
+            obj2.f2("@@@@@@@@在fun2中调用，定义在fun2中的对象obj2的方法f2指向的是fun1 ---------");
+
+
+            (function () {
+                console.log("IIFE定义在fun2中", test, this);
+            })();
+
+            setTimeout(function () {
+                console.log("setTimeout定义在fun2中", test, this);
+            }, 1);
+
+            setTimeout((function () {
+                return function () {
+                    console.log("setTimeout定义在fun2中,闭包返回的函数", test, this);
+                }
+            })()
+                , 1);
         }
+
+        setTimeout(function () {
+            console.log("setTimeout定义在全局中", test, this);
+        }, 1);
+
+        setTimeout((function () {
+            return function () {
+                console.log("setTimeout定义在全局中,闭包返回的函数", test, this);
+            }
+        })()
+            , 1);
+
+        (function () {
+            console.log("IIFE定义在全局中", test, this);
+        })();
 
         fun2()
 
@@ -53,6 +85,36 @@
         临时总结：作用域链，取决于函数在哪定义，在哪个作用域中定义的就能读取作用域中的变量。与在哪调用无关，因此便产生了闭包。
         验证：箭头函数是否符合此规律
         `);
+
+
+
+
+
+
+        var myname = "g";
+        function f(){
+                console.log(myname,this);
+            }
+        function f1() {
+            this.myname = "f1"
+            // var myname = "f1"
+            
+            f();
+        }
+        
+
+        
+        // f1();
+        new f1();
+
+        console.log(myname)
+
+
+
+
+
+
+
     </script>
 </body>
 
