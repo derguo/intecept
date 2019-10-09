@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function func() {
+        //     console.log("func");
+        // }
+
+        (function () {
+            console.log(func);
+
+            /* if (false) {
+                function func() {
+                    console.log("func");
+                }
+            } */
+
+            !function func(){
+                console.log("func in");
+            }
+
+        })();
+
+        /**函数提升（临时）
+        1.在作用域中直接定义的函数，提升
+        2.在判断语句中定义的函数，只提升变量
+        3.在语句中的函数不提升。并且只有本函数内部可见，外部不可见，也就是不能在其他地方调用。
+        */
+    </script>
+</body>
+
+</html>
