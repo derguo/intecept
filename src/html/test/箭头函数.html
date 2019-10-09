@@ -11,27 +11,68 @@
 <body>
     <script>
         console.log();
-        var func = function(params) {}
+        var func = function(params) {console.log(this)}
 
-        var func1 = () => {}
+        var func1 = () => {console.log(this);}
 
         var obj = {
             f(){
-
+                console.log(this);
             },
+            f1:() => {console.log(this);},
             f2:function(){
 
             },
             f3:function f3(){
 
-            }
+            },
+            func1,
         }
 
-        console.log(new func());
+        var ooo = {}
+
+        // console.log(new func());
         // console.log(new func1());
         // console.log(new obj.f1());
-        console.log(new obj.f3());
-    </script>
+        // console.log(new obj.f3());
+        
+        // obj.f1();
+        // obj.f();
+        //new obj.f(); //报错not a constructor
+        // obj.f.bind(null)();
+
+        // var objf = obj.f
+        // objf();
+        // new objf();
+
+        // new obj.f2()
+
+        // obj.func1();
+
+        // obj.f1.bind(ooo)()
+
+        // func1.bind(ooo)();
+
+        /**
+         *  1.箭头函数不能被bind,bind后this不变
+         *  2.箭头函数不能new
+         * */
+        
+
+        // new obj.f();
+        /**
+         *  字面量定义对象钟直接xxx()像这样定义的函数
+         * 1.不能被new 
+         * 2.不像箭头函数那this绑定对象所在的上下文 
+         * 3.谁调用this指向谁
+         * 4.可以bind其他对象
+        */
+        // obj.f();
+        // ooo.f = obj.f;
+        // ooo.f();
+        // new ooo.f();
+        obj.f.bind(ooo)()
+    </script> 
 </body>
 
 </html>
