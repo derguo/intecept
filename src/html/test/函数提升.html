@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function func() {
+        //     console.log("func");
+        // }
+        (function () {
+            console.log(func);
+
+            var a = true && function func(){
+                console.log("func in 表达式");
+            }
+
+            // console.log(a)
+
+            /* if (true) {
+                function func() {
+                    console.log("func");
+                }
+            } */
+    
+            // {
+            //     function func(){
+            //         console.log("func in block");
+            //     }
+            // }
+
+            // for(var i = 0; i <5; i++){
+            //     function func(){
+            //         console.log("func in for "+i);
+            //     }
+            // }
+
+            // !function func(){
+            //     console.log("func in");
+            // }
+
+        })();
+
+        /**函数提升，提升指的是在作用域中提升（临时）
+        1.在作用域中直接定义的函数，提升
+        2.在块级作用域中定义的函数，只提升变量，函数体不提升（兼容性）   （相当于var f = function....）
+        3.在语句中的函数不提升。并且只有本函数内部可见，外部不可见，也就是不能在其他地方调用。（兼容）
+        4.在IE8中命名函数无论在哪，都提升。IE9/10及其以上判断语句中不提升，块级作用域提升
+        */
+    </script>
+</body>
+
+</html>

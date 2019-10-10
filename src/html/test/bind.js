@@ -13,3 +13,5 @@ function func(){
 obj.f();
 
 obj.f1.bind(null)();
+
+new func.bind(null)();
