@@ -16,6 +16,34 @@
       }
       fun1();
       console.log(fun1);
+
+      console.log("*****************")
+
+      function func(){
+        console.log(this)
+      }
+
+      var obj = {
+        func,
+        f(){
+          console.log(this)
+        },
+        f1:() => {console.log(this)},
+      }
+
+      obj.f()
+      // var ff = obj.f;
+      // ff()
+
+      /* 
+       * 字面量定义的对象中简写的方法 （f() ）是一个不能new的普通函数，而不是箭头函数
+       * 证明：
+       * 1.函数调用的this，谁调用this是谁，不是像箭头函数一样定义时候上下文this，
+       * 2.函数可以bind，而箭头函数bind后返回的函数不起作用，也就是和原来的this一样
+       * 
+       */
+
+
     </script>
 </body>
 </html>

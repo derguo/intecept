@@ -92,22 +92,45 @@
 
 
         var myname = "g";
-        function f(){
-                console.log(myname,this);
-            }
+        function f() {
+            console.log(myname, this);
+        }
         function f1() {
             this.myname = "f1"
             // var myname = "f1"
-            
+
             f();
         }
-        
 
-        
+
+
         // f1();
         new f1();
 
         console.log(myname)
+
+
+
+        // 作用域链是否根据函数调用的不同而改变
+        console.log("***作用域链是否根据函数调用的不同而改变")
+
+        var mya = "w"
+        function myfunc() {
+            console.log(mya)
+        }
+
+        function mytest() {
+            var mya = "mytest"
+
+            var obj = {
+                f: myfunc,
+            }
+
+            myfunc.call(obj)
+        }
+
+
+        mytest()
 
 
 
