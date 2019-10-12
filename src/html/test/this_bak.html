@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // //严格模式下的，简单对象内部方法的this
+        //"use strict"
+        // var a = "globle"
+        // var obj = {
+        //     a:"obj",
+        //     f1:function(){
+        //         console.log(this);
+        //     }
+        // }
+
+        // obj.f1();
+
+        // var f = obj.f1;
+
+        // f();
+
+        var a = "globle";
+
+        console.log("箭头函数在函数中定义分别直接调用和new运算符调用，箭头函数钟的this指向。")
+
+
+        var f111;
+        function fun() {
+
+            //this.a = "f obj";
+            // var a = "f";
+            // setTimeout(() => {
+            //     console.log("f-----",this);
+            // }, 2);
+
+            var f1 = () => { console.log("fun----", this); }
+            var f2 = function () { console.log("function-----", this); }
+            f111 = f1;
+
+            f1();
+            f2();
+        }
+
+        new fun();
+        //f111();
+        fun();
+        console.log("-------------");
+
+
+
+
+        function f5() {
+            console.log(this);
+            function inf() {
+                console.log(this);
+            }
+
+            var inf1 = () => {
+                console.log(this);
+            }
+
+            inf();
+        }
+        var obj = {
+            f: f5,
+            f2: () => {
+                console.log(this);
+                var f1 = () => {
+                    console.log(this);
+                }
+
+                function f2() {
+                    console.log(this);
+                }
+
+                f1();
+                f2();
+            }
+
+        }
+
+        obj.f();
+        obj.f2();
+
+        obj.f3 = () => {
+            console.log("boj f3------", this);
+        }
+        obj.f5 = function () {
+            console.log("boj f5------", this);
+        }
+
+        obj.f3();
+        obj.f5();
+        console.log("-------------");
+        var obj2 = {
+            obj: obj,
+        }
+        obj2.obj.f3();
+        obj2.obj.f5();
+
+        console.log("-------------");
+
+        function fun1() {
+            this.f1 = () => {
+
+            }
+        }
+
+        class obj3 extends fun1 {
+            constructor() {
+                super();
+                this.obj3Fun = () => {
+                    console.log("obj3 f ########", this);
+                }
+                this.obj3Fun1 = function () {
+                    console.log("obj3 f1 ########", this);
+                }
+            }
+        }
+
+        new obj3().obj3Fun();
+        new obj3().obj3Fun1();
+
+        console.log("--------------------------")
+        function go() {
+            this.a = 50;
+        }
+        go.prototype.a = 60;
+        console.log(new go());
+        console.log("------------自执行函数的this-------------------");
+
+        (function () {
+            console.log("IIFE-----", this);
+        })();
+
+        (() => {console.log("IIFE 箭头------",this);})();
+
+        function func1() {
+            (function () {
+                console.log("IIFE-----", this);
+            })();
+
+            (() => {console.log("IIFE 箭头------",this);})();
+        }
+
+        new func1();
+        func1();
+
+
+        console.log("----------------------------\n总结：函数中的this分为常规函数和箭头函数。\n常规函数的this指向是谁调用函数，函数中的this就指向谁。\n箭头函数中的this是，寻找函数定义时候的上下文中的this（有种说法是父级的this，感觉说的都是一个意思。）\n注：箭头函数在运行时被定义，在定义的时候就绑定了上下文的this\n\n个人总结，常规函数寻找的是原型链箭头函数寻找的是作用域链。这个观点有待于考证。）-----------");
+    
+        
+
+
+
+        function func(params) {
+            var f = () => {console.log(this);}
+        }
+
+        func();
+        new func();
+    </script>
+</body>
+
+</html>

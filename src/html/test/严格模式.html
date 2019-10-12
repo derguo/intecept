@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 未定义使用的变量，非严格模式下，被自动定义在了全局。
+        /* function foo(){
+            a =1;
+        }
+
+        foo()
+        console.log(a); */
+
+        //例1：严格模式对子作用域是否起作用。
+        // 结论：起作用，在严格模式域内定义的所有代码都按照严格模式执行.
+        
+        /* function bar() {
+            a = 1;
+        }
+        function foo(){
+            'use strict';
+            bar();//这个时候下面的不会报错。是因为bar函数不是严格模式运行，所以全局被自动定义了一个a，下面的函数运行的时候有了a。
+            return function bar(){
+                a = 1;
+            }
+        } */
+
+        
+
+        
+
+        foo()()
+        
+    </script>
+</body>
+</html>

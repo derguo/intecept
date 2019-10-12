@@ -24,7 +24,13 @@
 
         obj.f();
 
-        new func.bind(null)()
+        // new func.bind(null)()
+
+        //例1：验证bind的默认传值
+        function foo() {
+            console.log(arguments);
+        }
+        foo.bind(null,1,2)(3)
 
         </script>
 </body>
