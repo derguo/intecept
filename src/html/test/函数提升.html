@@ -22,11 +22,11 @@
 
             // console.log(a)
 
-            /* if (false) {
+            if (true) {
                 function func() {
                     console.log("func");
                 }
-            } */
+            }
     
             // {
             //     function func(){
@@ -34,11 +34,11 @@
             //     }
             // }
 
-            for(var i = 0; i <5; i++){
-                function func(){
-                    console.log("func in for "+i);
-                }
-            }
+            // for(var i = 0; i <5; i++){
+            //     function func(){
+            //         console.log("func in for "+i);
+            //     }
+            // }
 
             // !function func(){
             //     console.log("func in");
@@ -51,6 +51,7 @@
         2.在块级作用域中定义的函数，只提升变量，函数体不提升（兼容性）   （相当于var f = function....）
         3.在语句中的函数不提升。并且只有本函数内部可见，外部不可见，也就是不能在其他地方调用。（兼容）
         4.在IE10及其以下中命名函数无论在哪，都提升。
+        5.IE8无论什么情况（在判断语句中，还是在表达式中都提升）
         */
     </script>
 </body>
