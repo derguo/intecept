@@ -110,7 +110,7 @@
         foo(); */
 
         //例6：验证通常闭包用法的情况下，闭包特例是否还存在。结论：只要作用域内的函数用到了闭包，不管是哪函数，其他函数都会产生闭包（chrome），火狐例外，函数内用不用到上下文中的变量都会有闭包，
-        function foo(){
+        /* function foo(){
             var a = 1;
             function f1() {
                 function ff(params) {
@@ -128,8 +128,21 @@
         }
 
         var func = foo();
-        func();
+        func(); */
 
+        //例7：验证同一个函数产生的闭包是否是运行的时候产生的，运行两次同一个闭包是否用的是同一个变量；
+        // 结论同一个函数运行两次则形成两个上下文，所以形成的闭包必然是两个。
+        // function func(){
+        //     var a = null;
+        //     console.log(a);
+        //     return function (){
+        //         a += 1;
+        //         console.log(a)
+        //     }
+        // }
+
+        // func()()
+        // func()()
 
 
 

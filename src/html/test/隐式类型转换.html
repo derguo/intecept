@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //function参与运算的时候。toString和valueOf的调用顺序
+        //结论：复杂数据类型参与运算会先调用toString如果返回的是原始数据类型则返回则参与运算，如果toString返回的依然是复杂数据类型则调用valueOf,如果valueOf方法返回的是原始数据类型，则使用返回值参与运算，如果返回依然是复杂数据类型，则报错。
+        /* function foo(params) {
+            return 1+1;
+        }
+        // var foo = {}
+        foo.toString = function () {
+            return 1;
+        }
+
+        foo.valueOf = function (params) {
+            return {};
+        }
+
+        console.log(foo + "1"); */
+    </script>
+</body>
+</html>
