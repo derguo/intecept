@@ -130,7 +130,28 @@
         }
 
 
-        mytest()
+        //mytest()
+
+        (function () {
+            console.log("-------------------------")
+            var test = "g"
+            function bar(params) {
+                console.log(test);
+            }
+
+            function foo(params) {
+                var test = "foo";
+                this.b1 = function (params) {
+                    console.log(test)
+                }
+                this.b2 = bar
+            }
+
+            var obj = new foo()
+            obj.b1()
+            obj.b2()
+            console.log("-------------------------")
+        })()
 
 
 

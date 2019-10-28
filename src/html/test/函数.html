@@ -10,11 +10,12 @@
 
 <body>
     <script>
+        /* //参数默认值，貌似ie不支持
         function func(arg = 1) {
             console.log(arg)
         }
 
-        func()
+        func() */
         //柯里化
         /* function toCurry(fun,args){
             args = args || [];
@@ -40,7 +41,101 @@
         console.log(f(1)(2,3,4)(5));
         */
 
+        //柯里化扩展,无限柯里化
+        /* function toCurry(func,args) {
+            args = args || []
+
+            var r = function(...arg){
+                args.push(...arg);
+                 
+                return toCurry(func,args);
+            }
+
+            r.toString = function(){
+                return func.apply(null, args);
+            }
+            
+            return r;  
+        }
+
+        function bar(...params) {
+
+            return [].reduce.call(params,function(pv,item,index,arr){
+                return item + pv;
+            },0)
+            
+        }
+
+        var _bar =  toCurry(bar)
+
+        console.log(_bar(1,2,3)(4,5,6,7)+1); */
+
+
+        /* //代码组合
+        function compose(...args) {
+            var arity = args.length - 1;
+            var tag = false;
+            if (typeof args[arity] === 'function') {
+                tag = true;
+            }
+            if (arity > 1) {
+                var param = args.pop(args[arity]);
+                arity--;
+                var newParam = args[arity].call(args[arity], param);
+                args.pop(args[arity]);
+                args.push(newParam);
+                console.log(newParam);
+                return compose(...args);
+            } else if (arity == 1) {
+
+
+                if (!tag) {
+                    return args[0].bind(null, args[1]);
+                } else {
+                    return args[0].call(null, args[1]);
+                }
+            }
+        }
+
+
+        var fn1 = function (a) { return a + 100 }
+        var fn2 = function (a) { return a + 10 }
+        var fn3 = function (a) { return a + 20 }
+        var bar = compose(fn1, fn2, fn3, 10);
+        console.log(bar());
+
+        var base = function () {
+            return arguments[0] + arguments[1];
+        }
+        var foo1 = function (fn) {
+            return fn.bind(null, 20);
+        }
+        var foo2 = function (fn) {
+            return fn.bind(null, 30);
+        }
+        var res = compose(foo1, foo2, base);
+        console.log(res()); */
+
+        //Function的构造函数是啥
+        console.log(Function.__proto__);
+        console.log(Function.prototype.prototype);
+        console.log(Object.__proto__);
+        console.log(Object.prototype.__proto__);
         
+        console.log(Array.constructor);
+        console.log(Array.prototype.__proto__);
+
+        console.log([] instanceof Array)
+
+        /* console.log({}.constructor);
+        function foo(params) {
+            
+        }
+        console.log(new foo().constructor); */
+
+
+
+
     </script>
 </body>
 
