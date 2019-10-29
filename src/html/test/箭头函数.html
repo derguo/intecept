@@ -72,6 +72,17 @@
         // ooo.f();
         // new ooo.f();
         obj.f.bind(ooo)()
+
+        /* console.log("箭头函数的this是上下文的this");
+        //箭头函数的this是上下文的this
+        function foo(){
+            let bar = ()=>{
+                console.log(this);
+            }
+            bar()
+        }
+        foo()
+        foo.call(ooo) */
     </script> 
 </body>
 

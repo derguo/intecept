@@ -8,8 +8,14 @@
   </head>
   <body>
     <script>
-      console.log(Function.constructor);
-      console.log(Object.__proto__);
+      function add() {
+        
+      }
+      console.log(Function.prototype.__proto__);
+      console.log(Object.prototype.constructor);
+      console.log(add.__proto__)
+      
+      console.log(Object.getOwnPropertyDescriptor(window,"onload"))
     </script>
   </body>
 </html>

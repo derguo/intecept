@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //验证结构赋值中冒号前面的是否是可用
+        //结论：冒号前面的是表示引用对象里的属性，冒号后面的才是定义的变量，如果想即结构父级又结构子集对象，可以如下的方法let {config:t,config:{age,call}} = obj;
+        /* let obj = {
+            name : "tom",
+            config : {
+                age:"10",
+                call:"call"
+            }
+        }
+
+        let {xxx:x = {x:1},config:t = {},config:{age,call}} = obj;
+        console.log(config,t,x); */
+
+        //数组的结构赋值，验证用对象的方法是否可行，感觉应该是可行的，
+        //结论：可行的。
+        /* let arr = [1,2,3,4,5,6 ]
+        let {0:ling,2:er} = arr;
+        console.log(ling);
+        //正常是如下酱紫的：
+        let [a,b,c,d,e,f] = arr;
+        let [one,...some] = arr
+        console.log(some); */
+
+        //验证结构赋值，同一个值是否可以用两次。
+        //结论：可以的。
+        /* let obj = {
+            name:"tom",
+            age:10
+        }
+
+        let {name:n,name:nm} = obj;
+        console.log(n,nm); */
+    </script>
+</body>
+</html>
