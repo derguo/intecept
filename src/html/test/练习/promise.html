@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function sto(times,msg) {
+            return new Promise(function (resolve,reject) {
+                setTimeout(() => {
+                    resolve(msg)
+                }, times);
+            })
+        }
+
+        function foo(){
+            return new Promise(function (resolve,reject) {
+                
+                if(false){
+                    resolve("ok");
+                    adsf
+                }else{
+                    reject("err")
+                    console.log("eeeeeeee");
+                    throw new Error("yigecuo")////如果在promise状态改变之后抛错，则抛错不会被捕获，抛错之后的代码不执行（什么情况抛错之后的代码都不执行）
+                    console.log("aaaaaaaaaaa");
+                }
+            })
+        }
+
+        function fn(params) {
+            return 10;
+        }
+        //验证async await不是promise会是什么效果
+        //结论：和是promise的效果一样，需要注意的是async内需要用try catch捕获reject和异常
+        //async执行时候返回的是一个Promise函数，无论函数是否有返回值
+        /* async function bar(params) {
+            let t = await foo();
+            console.log("t",t);
+            console.log("await");
+            return 10;
+        }
+
+        console.log("async",bar());//async执行时候返回的是一个Promise函数，无论函数是否有返回值
+        console.log("---") */
+
+        
+        //Promise.race & Promise.all练习
+        /* Promise.all([sto(2000,"one"),foo()]).then(
+            function (v) {
+                console.log(v);
+            }
+        )
+        Promise.race([sto(2000,"one"),foo()]).then(
+            function (v) {
+                console.log(v);
+            }
+        ) */
+
+        //验证，Promise捕获异常，或者reject，当then的第二个参数和then同时定义了，会是什么效果。
+        //结论：定义了then的第二个参数catch就没用了，
+        //如果在promise状态改变之后抛错，则抛错不会被捕获，抛错之后的代码不执行（什么情况抛错之后的代码都不执行）
+        /* foo().then(function (data) {
+            console.log(data);
+        },function (err) {
+            console.log("in then",err);
+        }).catch(function (err) {
+            console.log("in catch",err);
+        }) */
+    </script>
+</body>
+</html>

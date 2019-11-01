@@ -73,6 +73,7 @@
         var obj ={
             n:"o",
             getN:function(){
+                console.log(this);
                 return function() {
                     return this.n
                 }
@@ -81,6 +82,7 @@
         }
 
         console.log(obj.getN()());
+        new obj.getN()
 
 
     </script>
