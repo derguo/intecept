@@ -1,4 +1,27 @@
 # JavaScript核心
+- [JavaScript核心](#javascript%E6%A0%B8%E5%BF%83)
+    - [基础数据结构](#%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84)
+        - [栈stack（后进先出--LIFO，last in first out）](#%E6%A0%88stack%E5%90%8E%E8%BF%9B%E5%85%88%E5%87%BA--lifolast-in-first-out)
+        - [堆heap](#%E5%A0%86heap)
+        - [队列queue（先进先出--FIFO，first in first out）](#%E9%98%9F%E5%88%97queue%E5%85%88%E8%BF%9B%E5%85%88%E5%87%BA--fifofirst-in-first-out)
+    - [内存空间](#%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4)
+        - [基础数据类型与变量](#%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%8F%98%E9%87%8F)
+        - [引用数据类型与堆内存空间](#%E5%BC%95%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%A0%86%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4)
+        - [内存空间管理](#%E5%86%85%E5%AD%98%E7%A9%BA%E9%97%B4%E7%AE%A1%E7%90%86)
+    - [执行上下文](#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87)
+        - [执行上下文三种情况](#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E4%B8%89%E7%A7%8D%E6%83%85%E5%86%B5)
+        - [执行上下文的生命周期](#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F)
+    - [变量对象](#%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1)
+        - [变量对象的创建过程](#%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA%E8%BF%87%E7%A8%8B)
+    - [作用域与作用域链](#%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE)
+      - [作用域](#%E4%BD%9C%E7%94%A8%E5%9F%9F)
+        - [全局作用域](#%E5%85%A8%E5%B1%80%E4%BD%9C%E7%94%A8%E5%9F%9F)
+        - [函数作用域](#%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8%E5%9F%9F)
+        - [块级作用域](#%E5%9D%97%E7%BA%A7%E4%BD%9C%E7%94%A8%E5%9F%9F)
+      - [作用域链（Scope chain）](#%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BEscope-chain)
+    - [闭包](#%E9%97%AD%E5%8C%85)
+    - [this](#this)
+    - [变量对象](#%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1-1)
 ### 基础数据结构
 ##### 栈stack（后进先出--LIFO，last in first out）
 栈可以看作一个按照顺序排列的消息数据（事件）集合。
