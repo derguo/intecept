@@ -1,21 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
     <script>
         //验证let在闭包中的规律
+        //例子1验证过程中，发现浏览器控制台出现一个和闭包很相似的块,
+        //所以想验证以下有闭包的情况下，块和闭包是如何共存的。见例子2
+        /* //例子1
         let arr = []
         for(let i = 0; i < 10; i++){
             arr[i] = function (){
-                sonsole.log(i)
+                debugger;
+                console.log(i)
             }
         }
         console.log(arr)
+        arr[6]() */
+
+        //例子2，有两个结论
+        //第一：就是for循环小括号里，是有一级块级作用域的，它是for大括号的块级作用域的父级块作用域。
+        //第二：（临时观点）在形成闭包的时候如果用到了块级作用域，就会形成一个类似闭包的块（block）原理和闭包相同
+        /* function foo() {
+            let arr = [];
+            let a = 1;
+            
+            for (let i = 0; i < 10; i++) {
+                let j = 2;
+                let k = 3;
+                arr[i] = function () {
+                    let w = 5;
+                    debugger
+                    console.log(i,a,j,k,w,arr)
+                }
+            }
+            return arr;
+        }
+        var bar = foo()[6]
+        bar()
+        // foo()[6]();//这么调用方法中的this指向的是数组，相当于调用数组的6方法
+        */
+
+        //例子3：验证产生类似闭包块的时候，父级作用域的let变量的变化对子块的影响
+        //结论：和闭包一样，具有相同父级的闭包块，共享闭包块中的变量。
+        /* function foo() {
+            let top = 0;
+            let arr = [];
+            {
+                let a = 2;
+                {
+                    arr[0] = function () {
+                        console.log(a);
+                    }
+                }
+                a++;
+                {
+                    arr[1] = function () {
+                        console.log(a);
+                    }
+                }
+
+            }
+            return arr;
+        }
+        var bar = foo()[0]
+        bar() */
+
+        //例子4：试图模拟一个for循环的原理，以符合小括号内带有let的情况
+        function foo() {
+            let top = 0;
+            let arr = [];
+            {
+                let a = 2;
+                {
+                    arr[0] = function () {
+                        debugger
+                        console.log(a);
+                    }
+                }
+                a++;
+                {
+                    arr[1] = function () {
+                        debugger
+                        console.log(a);
+                    }
+                }
+
+            }
+            return arr;
+        }
+        var bar = foo()[0]
+        bar()
+
     </script>
 </body>
+
 </html>
