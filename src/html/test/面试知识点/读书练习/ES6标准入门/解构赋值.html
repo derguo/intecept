@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //例子1：验证解构的嵌套
+        /* let  arr = [1,2,{a:11,b:22},3]
+        let [one,tow,{a,b},three] = arr;
+        console.log(one,tow,a,b,three) */
+
+        /* let obj = {one:1,tow:2,three:["hello",{say:"world"}]};
+        let {one,tow,three:[hello,{say}],three} = obj;
+        console.log(one, tow, three, hello, say);
+        */
+        //还可以如下赋值，注意最外加了小括号。
+        /* let obj = {};
+        let arr = [];
+        ({ a: obj.one, b: arr[0] } = { a: 1, b: 2 })
+        console.log(obj, arr) */
+
+        a:1;
+    </script>
+</body>
+
+</html>

@@ -26,6 +26,9 @@
 
         //例子2，有两个结论
         //第一：就是for循环小括号里，是有一级块级作用域的，它是for大括号的块级作用域的父级块作用域。
+        //      for每一次循环都会形成一个独立的块作用域，其中小括号中是父级，循环体是子级。
+        //      当块级作用域中定义的函数，引用了改块中的let变量。则形成了一个类似闭包的块（block），
+        //      所以在for循环体中的函数，在每次循环中都形成了互不干扰的类似闭包块（block）
         //第二：（临时观点）在形成闭包的时候如果用到了块级作用域，就会形成一个类似闭包的块（block）原理和闭包相同
         /* function foo() {
             let arr = [];
@@ -43,9 +46,26 @@
             return arr;
         }
         var bar = foo()[6]
+        console.log(bar)
         bar()
         // foo()[6]();//这么调用方法中的this指向的是数组，相当于调用数组的6方法
         */
+
+        //例子2-1：验证单纯块的let用在闭包上的效果
+
+        function foo(params) {
+            {
+                let a = 1;
+                return function (params) {
+                    debugger
+                    console.log(a);
+                }
+            }
+            
+        } 
+
+        let bar = foo()
+        bar()
 
         //例子3：验证产生类似闭包块的时候，父级作用域的let变量的变化对子块的影响
         //结论：和闭包一样，具有相同父级的闭包块，共享闭包块中的变量。
@@ -73,7 +93,7 @@
         bar() */
 
         //例子4：试图模拟一个for循环的原理，以符合小括号内带有let的情况
-        function foo() {
+        /* function foo() {
             let top = 0;
             let arr = [];
             {
@@ -96,7 +116,41 @@
             return arr;
         }
         var bar = foo()[0]
-        bar()
+        bar() */
+
+        //例子5：验证for循环小括号里的是不是一个块作用域。
+        //结论：是一个块作用域
+        //再验证小括号里的三个语句的执行顺序
+        //结论：第一语句只在开始执行一次。接下来是第二语句>循环体>第三语句以此类推,直到语句二的值为false
+        //结论2：第二第三语句不能是变量声明语句
+        /* for(
+            let a = 0; 
+            (function (){console.log("语句2"); return a < 3;})() ;
+            (function (){a++;console.log("语句3")})()
+            ){
+            console.log("for循环体")
+        } */
+
+        //例子6：验证let是否真的是不能存在变量提升；按照JavaScript核心。。。中说的。其实是存在提升的，只不过没有赋任何值。那么以下验证，直接使用变量和在TDZ中使用let的报错是不是一样的
+        //（chrome中验证的）报错是不一样的。但是这个例子也无法验证JavaScript核心。。。说的是不是对的
+        //结论：就按照通常说的，let const不存在提升
+        // console.log(asdfasdf);//Uncaught ReferenceError: asdfasdf is not defined
+        // console.log(a)//Uncaught ReferenceError: Cannot access 'a' before initialization
+        // let a = 1;
+
+        /* var abc = "abc"
+        console.log(abc++)
+
+        for (var i = 0;(function name(params) {
+            console.log("语句2",i)
+            return i < 3;
+        })() ; i++) {
+            var i = 'abc';
+            console.log(i);
+        } */
+
+
+
 
     </script>
 </body>

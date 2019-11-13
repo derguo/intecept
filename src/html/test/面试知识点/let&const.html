@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     //例子1，有两个结论
+        //第一：就是for循环小括号里，是有一级块级作用域的，它是for大括号的块级作用域的父级块作用域。
+        //      for每一次循环都会形成一个独立的块作用域，其中小括号中是父级，循环体是子级。
+        //      当块级作用域中定义的函数，引用了改块中的let变量。则形成了一个类似闭包的块（block），
+        //      所以在for循环体中的函数，在每次循环中都形成了互不干扰的类似闭包块（block）
+        //第二：（临时观点）在形成闭包的时候如果用到了块级作用域，就会形成一个类似闭包的块（block）原理和闭包相同
+        /* function foo() {
+            let arr = [];
+            let a = 1;
+            
+            for (let i = 0; i < 10; i++) {
+                let j = 2;
+                let k = 3;
+                arr[i] = function () {
+                    let w = 5;
+                    debugger
+                    console.log(i,a,j,k,w,arr)
+                }
+            }
+            return arr;
+        }
+        var bar = foo()[6]
+        bar()
+        // foo()[6]();//这么调用方法中的this指向的是数组，相当于调用数组的6方法
+        */
+
+        //例子2:es6入门中的暂时性死区（TDZ）的例子
+        //验证函数形参是不是let
+        //结论： 验证函数形参是let
+        // {
+        //     console.log(a)
+        //     let a = 1;
+        // }//Uncaught ReferenceError: Cannot access 'a' before initialization
+        // function foo(y = x, x = 1) {
+        //     console.log(y)
+        // }//Uncaught ReferenceError: Cannot access 'x' before initialization
+        // console.log(aaldkfj)//Uncaught ReferenceError: aaldkfj is not defined
+
+        // function foo(y,x) {
+            
+        // }
+        // foo()
+
+
+    </script>
+</body>
+</html>
