@@ -49,3 +49,7 @@ ES6允许按照一定的模式从数组和对象中提取值，然后对变量�
 undefined和null不能转换为对象，对它们解构赋值的时候会报错。
 ### 函数的参数解构赋值
 按照解构赋值灵活掌握
+
+## 字符串
+### codePointAt (es6)识别32位UTF-16的字符
+### String.formCodePoint (es6)识别32为UTF-16
