@@ -7,13 +7,25 @@
     <title>Document</title>
 </head>
 <body>
+  <div id='box'></div>
     <script>
-      let s = '123456789011'
-      let str = s.padEnd(10, 'abcdefg')
-      console.log(str)
+      // let s = '123456789011'
+      // let str = s.padEnd(10, 'abcdefg')
+      // console.log(str)
 
       // let s1 = `aasdf${ let a = 1 }asdf`
       // console.log(s1)
+      const str = '\nasdf'
+      let s = `hello \n${ str } word ${ 2 }`
+      function func(params,...values) {
+        console.log(params, values)
+        document.querySelector('#box').innerHTML = params.raw[0]
+      }
+
+      func`hello \n${ str } word ${ 2 }`
+      // func`${ s }`
+      console.log(String.raw`hello \n${ str } word ${ 2 }`, `hello \n${ str } word ${ 2 }`)
+      
     </script>
 </body>
 </html>
