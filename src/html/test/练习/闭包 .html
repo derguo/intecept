@@ -9,17 +9,28 @@
 <body>
     <script>
         // 例1；
-        /* function test(){
+        function test(){
             var a = 1;
-            return function(){
+            var b = 2;
+            let c = 3;
+            // debugger;
+            return function closure1(){
+                var a=  1;
+                console.log(a)
                 debugger;
             }
         }
 
         var f = test()
 
-        f(); */
+        f();
 
+        function test1(){
+            var a = 1;
+            f();
+            // debugger;
+        }
+        test1();
         
         /**
          * 1.公共定义：能读取函数内部的函数就是闭包，在即函数返回那个闭包，在chrome中闭包指形成闭包的是作用域上下文的函数，在浏览器debug中的scope里能看到closture

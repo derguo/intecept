@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 </head>
+
 <body>
+    <div id="box"></div>
     <script>
-        function sto(times,msg) {
+        /* function sto(times,msg) {
             return new Promise(function (resolve,reject) {
                 setTimeout(() => {
                     resolve(msg)
@@ -33,7 +36,7 @@
 
         function fn(params) {
             return 10;
-        }
+        } */
         //验证async await不是promise会是什么效果
         //结论：和是promise的效果一样，需要注意的是async内需要用try catch捕获reject和异常
         //async执行时候返回的是一个Promise函数，无论函数是否有返回值
@@ -47,7 +50,7 @@
         console.log("async",bar());//async执行时候返回的是一个Promise函数，无论函数是否有返回值
         console.log("---") */
 
-        
+
         //Promise.race & Promise.all练习
         /* Promise.all([sto(2000,"one"),foo()]).then(
             function (v) {
@@ -70,6 +73,296 @@
         }).catch(function (err) {
             console.log("in catch",err);
         }) */
+
+        /**
+        resolve一个promise效果
+        结论：在Promise里resolve一个另一个Promise则这个Promise的状态由另一个Promise决定
+              在Promise里resolve一个另一个Promise则这个Promise的状态与另一个Promise无关，则按照原规则执行catch，参数为另一个Promise
+        
+        let p1 = new Promise(function name(resolve, reject) {
+
+            // resolve('p1')
+            // reject('p1')
+
+            setTimeout(() => {
+                //throw new Error('setTimeout报错了哈哈哈')
+                console.log(this)
+                // reject('p1')
+                resolve('p1')
+            }, 2000);
+        })
+
+        let p2 = new Promise(function name(resolve, reject) {
+            resolve(p1)
+            //貌似一个Promise被另一个Promise给resolve了，那个Promise自己reject的时候会报错：Uncaught (in promise) p1有待进一步验证
+            //原因：因为这里p1被resolve了，p2的状态由p1决定，当promise状态变为rejected的时候，必须有处理，否则报错，比如用catch或then的第二参数处理。
+            //reject(p1)//reject不受p1状态影响
+        })
+        p2.then(
+            (value) => {
+                throw new Error('p2 then报错了哈哈哈')
+                console.log("p2 ok:", value)
+            }, (err) => {
+                throw new Error('p2 then err报错了哈哈哈')
+                console.log("p2 then err", err)
+            }).catch(err => {
+                console.log("p2 catch err", err)
+            })
+
+        p1.then(
+            (value) => {
+                // throw new Error('setTimeout报错了哈哈哈')
+                console.log("p1 ok:", value)
+            }, (err) => {
+                console.log("p1 then err", err)
+            }).catch((err) => {
+                console.log("p1 catch err", err)
+            })
+        
+        */
+        /* 验证再then中返回一个promise 
+           结论: 1.then和catch都返回另一个不同的promise，如果在then或catch中return一个指定的promise，
+             则then和catch返回的就是这个return的promise
+                 2.一个promise可以有多个自己的then和chatch
+                 3.Promise中的抛出的异常会由then的第二个参数捕获，then第一参数和第二参数抛出的异常由catch捕获,
+             then的链式调用中，任意一个then抛出异常（无论第一参还是第二参），都会由后面最近的catch捕获,
+             书上说promise报错具有“冒泡”性质，一直会向后传递，直到被捕获。
+        */
+        /* let p1 = new Promise(function name(resolve, reject) {
+            //reject('p1')
+            // asdf;
+            setTimeout(() => {
+                // 啊啊啊啊啊啊啊
+                // resolve("p1111");
+                reject('p1111')
+            }, 1000);
+        })
+        p1.then(value => {
+            console.log('p1自己', value);
+        })
+        p1.then(value => {
+            console.log('p1自己2', value);
+            return p1
+        }).catch(err => {
+            console.log('p1自己2err', err);
+            return p2
+        }).then(value => {//这里的then什么时候都会执行
+            console.log('catch的then', value);
+        })
+        var p2 = new Promise(function name(resolve, reject) {
+            setTimeout(() => {
+                resolve('p2')
+            }, 2000);
+        })
+
+        p2.then((...value) => {
+            console.log(value);
+            return p1
+        }).then((...value) => {
+            士大夫
+            console.log(value);
+            // return p1
+        },(...err) => {
+            阿斯顿发士大夫
+            console.log('err', err);
+        }).then(value => {
+            console.log(value);
+            return 1
+        }).then(value => {
+            console.log(value);
+        }).catch(err => {
+            console.log('最后的catch', err);
+        }).then(value => {
+            阿斯蒂芬
+            console.log(value);
+        }).catch(err => {
+            console.log('最后的2catch', err);
+        })
+        console.log('end code') */
+        /* Promise.all 
+           结论：只有全都resolve，all才resolve，如果有一个reject，则all马上catch，参数为那个reject的参数
+                 每个promise都可以有自己的then和catch
+           Promise.race
+           结论：只要有一个promise改变状态了，.rece就就改变成相同的状态。
+        */
+        /* let p0 = new Promise(function (resolve, reject) {
+            setTimeout(() => {
+                resolve('p0')
+            }, 2000);
+        })
+        let p1 = new Promise(function (resolve, reject) {
+            setTimeout(() => {
+                resolve("p1");
+            }, 3000);
+        }).catch(
+            (err) => {
+                console.log('p1 err:', err)
+            }
+        )
+        let p2 = new Promise(function (resolve, reject) {
+            setTimeout(() => {
+                resolve("p2");
+            }, 1000);
+        })
+        p2.then(
+            (value) => {
+                console.log('p2 ok2', value)
+            }
+        ).catch(
+            (err) => {
+                console.log('p2 err2', err)
+            }
+        )
+        p2.then(
+            (value) => {
+                console.log('p2 ok3', value)
+            }
+        ).catch(
+            (err) => {
+                console.log('p2 err3', err)
+            }
+        )
+
+        Promise.all([p0, p2, p1]).then(
+            (value) => {
+                console.log(value)
+            }
+        ).catch(
+            (err) => {
+                console.log('all err', err)
+            }
+        ) */
+
+
+
+
+        /* Promise.resolve，将参数转换为Promise对象
+           结论： 如果参数为空，直接返回Promise对象，状态为<resolve>:undefined
+                  如果参数为基础数据类型，直接返回Promise对象，状态为<resolve>:传入的参数
+                  如果参数为Promise对象，则不会做任何处理，原封不动返回参数Promise对象
+                  如果参数为一个对象有两种情况。如果是thenable对象（有then方法的对象）则执行对象的then方法，并向then方法传入resolve和reject方法作为参数。如果这个then方法没有
+         */
+        /* var obj = {
+            then() {
+                console.log("obj");
+            }
+        }
+        var p = Promise.resolve(obj)
+        var p1 = Promise.resolve("p1")
+        var p2 = Promise.resolve();
+
+        console.log(p)
+        console.log(p1)
+        console.log(p2)
+
+        p.then(function (value) {
+            console.log('p then', value);
+        }).then(function (value) {
+            console.log('p then2', value);
+        }) */
+
+        /* 给promise.all加一个过期时间（timeout） */
+        /* function ajx() {
+            return new Promise((resolve, reject) => {
+                var http = new XMLHttpRequest()
+                http.open('get', 'http://192.168.101.15:3000')
+                // http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                http.onload = e => {
+                    resolve(e.currentTarget.response)
+                }
+                http.ontimeout = e => {
+                    reject(e)
+                }
+                http.onerror = e => {
+                    reject(e)
+                }
+                http.timeout = 3000
+                http.send()
+            })
+
+        }
+
+        var p1 = ajx()
+
+        var p2 = ajx()
+
+        var p3 = ajx()
+
+        var p4 = ajx()
+
+        var p5 = ajx()
+
+        var p6 = ajx()
+
+        Promise.allWithTimeout = function (promises, timeout) {
+            try {
+                var iterator = promises[Symbol.iterator]()
+            } catch (error) {
+                throw new Error('参数无iterator接口')
+            }
+
+            let ps = []
+            for (const v of iterator) {
+                let p = this.resolve(v)
+                p.then(v => {
+                    p.state = "fulfilled"
+                }).catch(err => {
+                    p.state = "rejected"
+                })
+
+                ps.push(p)
+            }
+
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    ps.every(v => v.state == "fulfilled") || reject("timeout")
+                }, timeout);
+                this.all(ps).then(v => resolve(v)).catch(err => {reject(err)})
+            })
+        }
+
+        Promise.allWithTimeout([p1, p2, p3, p4, p5, p6, 1], 2000)
+            .then(v => {
+                console.log('ok:', v)
+            }).catch(err => {
+                console.log('err', err)
+            }) */
+        /* 验证promise主体函数中的timeout的闭包问题,
+            结论：timeout回调函数会产生一个promise的闭包
+            附加问题：入列宏任务方式，
+                 结论：旧版本chrome有个bug，在打了断点之后
+                       当有两个主任务（<script>）第一个主任务中的有settimeout
+            
+        */
+        /* new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log("timeout")
+                // debugger
+                resolve("timeout")
+            }, 0);
+            
+        }) */
+
+        var name = ''
+
+        setTimeout(() => {
+            name += '222222222222'
+            console.log("timeout:", name)
+
+            // debugger
+        }, 0);
+        // for(let i = 0; i<100000; i++){
+        //     console.log(i)
+        // }
+        debugger
+        // true
     </script>
+    <script>
+
+        name += '1111111111111111'
+        console.log('other script code:', name)
+    </script>
+
 </body>
+
 </html>

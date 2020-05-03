@@ -25,30 +25,30 @@
 
             // console.log(a)
 
-           /*  if (true) {
+            if (true) {
                 function func() {
                     console.log("func");
                 }
-            } */
-    
-            {
-                console.log(func)
-                // console.log(fname);//命名函数在表达式中不提升，这里报错
-                console.log(bar1);
-
-                function func(){
-                    console.log("func in block");
-                }
-
-                let bar = function fname(params) {
-                    console.log("func let bar in block")
-                }
-                
-                var bar1 = function (){
-                    console.log("func var bar1 in block");
-                }
-
             }
+    
+            // {
+            //     console.log(func)
+            //     // console.log(fname);//命名函数在表达式中不提升，这里报错
+            //     console.log(bar1);
+
+            //     function func(){
+            //         console.log("func in block");
+            //     }
+
+            //     let bar = function fname(params) {
+            //         console.log("func let bar in block")
+            //     }
+                
+            //     var bar1 = function (){
+            //         console.log("func var bar1 in block");
+            //     }
+            //     // console.log(fname)// 在表达式中的函数不提升。并且只有本函数内部可见，外部不可见，也就是不能在其他地方调用。（兼容）
+            // }
 
             // for(var i = 0; i <5; i++){
             //     function func(){
@@ -95,7 +95,7 @@
         2.在块级作用域中定义的函数，函数名当作var提升到函数作用域头部或者全局作用域，函数体提升到块级作用域头部（兼容性）   （相当于var f = function....）
         3.在表达式中的函数不提升。并且只有本函数内部可见，外部不可见，也就是不能在其他地方调用。（兼容）
         4.在IE10及其以下中命名函数无论在哪，都提升。
-        5.IE8无论什么情况（在判断语句中，还是在表达式中都提升）
+        5.IE8无论什么情况（在判断语句中，还是在表达式中）都提升
         */
     </script>
 </body>

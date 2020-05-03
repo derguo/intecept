@@ -1,31 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-  <div id='box'></div>
-    <script>
-      // let s = '123456789011'
-      // let str = s.padEnd(10, 'abcdefg')
-      // console.log(str)
-
-      // let s1 = `aasdf${ let a = 1 }asdf`
-      // console.log(s1)
-      const str = '\nasdf'
-      let s = `hello \n${ str } word ${ 2 }`
-      function func(params,...values) {
-        console.log(params, values)
-        document.querySelector('#box').innerHTML = params.raw[0]
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+      @font-face{
+          font-family: 'FontAwesome';
+          src: url('u11c00.woff')
       }
+      #box1{font-family:FontAwesome;}
+  </style>
+  <title>Document</title>
+</head>
 
-      func`hello \n${ str } word ${ 2 }`
-      // func`${ s }`
-      console.log(String.raw`hello \n${ str } word ${ 2 }`, `hello \n${ str } word ${ 2 }`)
-      
-    </script>
+<body>
+  
+  <div id='box1'></div>
+  <div style="position:fixed ;height: 200px;width: 200px;zoom: 1;background-color: aqua;z-index:100"></div>
+  <div id='box'></div>
+  <script>
+    // let s = '123456789011'
+    // let str = s.padEnd(10, 'abcdefg')
+    // console.log(str)
+
+    // let s1 = `aasdf${ let a = 1 }asdf`
+    // console.log(s1)
+    const str = '\nasdf'
+    let s = `hello \n${str} word ${2}`
+    function func(params, ...values) {
+      console.log('标签模板参数', params, values)
+      document.querySelector('#box').innerHTML = params.raw[0]
+    }
+    func`asdf`
+    // func`hello \n${ str } word ${ 2 }`
+    // func`${ s }`
+    // console.log(String.raw`hello \n${ str } word ${ 2 }`, `hello \n${ str } word ${ 2 }`)
+
+    //typescript支持
+    // let o = {name: 'tom', cat:{name: 'jerry'}}
+    // let name = o?.cat?.name
+    // console.log(name)
+    let a = 0.1 + null
+    if (a) console.log(this)
+
+    console.log('---\x20\xbb7----\u007a---𠮷----\n-----\u{20bb7}---\2222')
+    console.log(String.fromCodePoint(0x109E0))
+    document.querySelector('#box1').innerHTML = String.fromCodePoint(0x11C72) + String.fromCodePoint(0x20bb7)
+  </script>
 </body>
-</html>
+
+</html>𠮷

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%; width: 100%;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* * {
+            margin: 0;
+            padding: 0;
+        } */
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas" width="1500" height="600" style="background-color:darkslategrey;color: dodgerblue; "></canvas>
+    <button id="end">stop</button>
+    <script>
+        var s = document.getElementById("end");
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        let cx = 0;
+        let cy = 0;
+        let stop = null;
+        let step = 1;
+        c.addEventListener('click', function (e) {
+            cancelAnimationFrame(stop)
+            cx = e.clientX - c.getBoundingClientRect().left
+            cy = 0//e.clientY - c.getBoundingClientRect().top
+            draw()
+        })
+        s.addEventListener('click', function (e) {
+            cancelAnimationFrame(stop)
+        })
+        
+        let draw = () => {
+            ctx.clearRect(0, 0, 1500, 600);
+            
+            // cx -= 1;
+            step++;
+            cy += step* 3;
+            console.log(cy)
+            cy = cy > 510 ? 510 : cy;
+            
+            ctx.beginPath();
+            ctx.arc(cx, cy, 10, 0, 2 * Math.PI);
+            ctx.stroke();
+            ctx.fillStyle = "dodgerblue";
+            ctx.fill();
+            if (cy >= 510) {
+                step *= -1
+                // cancelAnimationFrame(stop)
+            }
+
+            stop = requestAnimationFrame(draw)
+            
+        }
+    </script>
+</body>
+
+</html>
