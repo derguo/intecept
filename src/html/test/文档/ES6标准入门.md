@@ -119,3 +119,31 @@ console.log(String.raw`hello \n${ str } word ${ 2 }`)
   其中如果指定全局g则返回一个只包含查询结果的数组。如果不是全局查找则执行一次匹配，该数组的第 0 个元素存放的是匹配文本，而其余的元素存放的是与正则表达式的子表达式匹配的文本。并且数组包含属性index和input（chrome还有一个groups属性），index是匹配字符串的位置索引，input是原字符串引用
 - 没找到返回null
 
+## Promise
+### 构造函数参数
+- 构造函数参数为一个接收两个函数（resolve和reject）的函数，函数中运行两个函数用来改变promise的状态
+### then
+- 用来获取Promise容器中的值，返回一个Promise
+### catch
+- 用来获取reject的值或者报错，返回一个promise
+### 注意事项
+- then和catch都返回一个promise，这个promise的状态取决于之前promise状态改变的时候是否有处理，如果没有处理，则返回的这个promise继承上一个promise的状态和值，如果有处理则这个promise就是一个崭新独立的promise，这都由上一个promise中状态改变的结果决定的。
+- 换个说法：promise的then和catch可以链式调用。在链式调用的过程中，当前的promise的状态取决于之前的链的每一环，如果之前某一环的状态改变没有的到相应的处理，则当前的promise就继承那个没有被处理的promise
+- 举个例子
+```
+        new Promise((resolve, reject) => {
+          //resolve('haha')
+          reject('yingying')
+        }).then(
+          undefined
+        ).then(value => {
+            console.log("then 2 :", value)
+        }).then(value => {
+            console.log("then 3 :", value)
+        }).catch(err => {
+            console.log("err 1 :", err)
+        })
+```
+- 上面的例子，最后一个是catch，是上一个then返回promise调用的catch，但是第一个promise中调用了reject('yingying')，在这个catch之前，没有能处理这个reject的，所以第一个promise的rejected状态和原因被传递到了这个catch来处理
+- 如果第一个promise调用的是resolve，第一个then并没有处理这个状态的改变，则状态和值被传递到了第二个then来处理
+- 之后调用的then或者catch的promise状态和值，取决于之前调用then或者catch的返回值，有三种个情况1. 如果返回值是一个promise则状态和值继承这个promise。 2. 如果返回值不是promise的其他值，则状态是fulfilled值为那个返回值3. 无返回值，则状态是fulfilled值为undefined。中间没有被调用的then或catch会被忽略

@@ -69,7 +69,7 @@
         */
 
         //例5:书中习题
-        var n = "w"
+        /* var n = "w"
         var obj ={
             n:"o",
             getN:function(){
@@ -82,7 +82,29 @@
         }
 
         console.log(obj.getN()());
-        new obj.getN()
+        new obj.getN() */
+
+        /* 验证函数中定义的箭头函数的this 
+           运行时定义，在哪定义就是此的上下文的this
+        */
+
+        let f;
+
+        function func(params) {
+            f = () => {
+                console.log(this)
+            }
+        }
+
+        // new func()
+        let obj = {
+            func
+        }
+        obj.func()
+        f()
+
+
+
 
 
     </script>

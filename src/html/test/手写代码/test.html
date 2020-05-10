@@ -1,0 +1,202 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: wang zhiguo
+ * @Date: 2020-05-04 14:02:01
+ * @LastEditors: wang zhiguo
+ * @LastEditTime: 2020-05-10 21:36:00
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        function MyPromise(executor) {
+            // pending、fulfilled、rejected
+            var value;
+            var state = "pending";
+            var onQueue = [];
+
+            function change(s, v) {
+                if (state === "pending") {
+                    value = v;
+                    state = s;
+                    run();
+                }
+            }
+
+            function exe() {
+                while (onQueue.length) {
+                    let onObj = onQueue.shift();
+                    if (onObj[state].on) {
+                        try {
+                            let returnvalue = onObj[state].on(value);
+                            if (returnvalue instanceof MyPromise) {
+                                returnvalue.then(onObj['fulfilled'].next, onObj['rejected'].next)
+                            } else {
+                                onObj["fulfilled"].next(returnvalue);
+                            }
+                        } catch (error) {
+                            onObj['rejected'].next(error);
+                        }
+                    } else {
+                        onObj[state].next(value);
+                    }
+                }
+            }
+
+            function run(params) {
+                if (state === "pending") {
+                    return
+                }
+                if (state === "rejected" && onQueue.length === 0) {
+                    console.error("在MyPromise里，需要注册一个处理异常情况的回调函数！！！");
+                } else {
+                    setTimeout(() => {
+                        exe();
+                    }, 0);
+                }
+            }
+
+            function register(onFulfilled, onRejected) {
+                var nextPromise = new MyPromise(function (resolve, reject) {
+                    onQueue.push({
+                        fulfilled: { on: onFulfilled, next: resolve },
+                        rejected: { on: onRejected, next: reject },
+                    });
+                });
+
+                run();
+                return nextPromise;
+            }
+
+            var resolve = change.bind(this, "fulfilled");
+
+            var reject = change.bind(this, "rejected");
+
+            this.then = register.bind(this);
+
+            this.catch = register.bind(this, undefined);
+
+            try {
+                executor(resolve, reject);
+            } catch (error) {
+                reject(error);
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <script>
+        let p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('p1:hahaha')
+            }, 2000);
+            
+            // reject('yingyingying')
+        })
+
+        let p2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('p2:hahaha')
+            }, 3000);
+            
+            // reject('yingyingying')
+        })
+
+        p2.then(value => {
+            console.log(2, value)
+        })
+        p2.then(value => {
+            console.log(2, value)
+        })
+        p2.then(value => {
+            console.log(2, value)
+        })
+
+        p1.then(value => {
+            console.log(1, value)
+        })
+        p2.then(value => {
+            console.log(2, value)
+        })
+        p1.then(value => {
+            console.log(1, value)
+        })
+
+
+
+        
+
+        // p.then(value => {
+        //     return new MyPromise((resolve, reject) => {
+        //         reject('aaa')
+        //     })
+        // }).then(value => {
+        // })
+
+        // console.log(p)
+
+        /* let promise = new Promise(function (resolve, reject) {
+            // resolve(); // 将状态修改为成功
+            reject(); // 将状态修改为失败
+        });
+        let p2 = promise.then(function () {
+            console.log("成功1");
+        });
+        promise.catch(function () {
+            console.log("失败1");
+        });
+        p2.then(function () {
+            console.log("成功2");
+        }).catch(function (err) {
+            console.log("失败2",err);
+        });
+        console.log(promise);
+        console.log(p2); */
+
+        // p.catch(err => {
+        //     console.log('err', err)
+        // })
+
+        // let myP = new Promise((resolve, reject) => {
+        //     a
+        //         resolve("ok")
+
+        //     })
+        // let p2 = p.then(value => {
+        //     console.log("then 2 :", value)
+        //     return myP
+        // }).catch(err => {
+        //     console.log("err 2 :", err)
+        // }) 
+        // p2.then(value => {
+        //     console.log("then 2 :", value);
+        // }).catch(err => {
+        //     console.log("err 2 :", err);
+        // })
+
+        // let p3 = p.then(value => {
+        //     console.log("then 3 :", value)
+        //     return myP
+        // }).catch(err => {
+        //     console.log("err 3 :", err)
+        // })
+
+        // p3.then(value => {
+        //     console.log("then 3 :", value);
+        // }).catch(err => {
+        //     console.log("err 3 :", err);
+        // })
+
+        // console.log(p2 == p3)
+
+    </script>
+</body>
+
+</html>
