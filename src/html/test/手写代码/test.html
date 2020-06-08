@@ -4,7 +4,15 @@
  * @Author: wang zhiguo
  * @Date: 2020-05-04 14:02:01
  * @LastEditors: wang zhiguo
- * @LastEditTime: 2020-05-13 23:02:00
+ * @LastEditTime: 2020-05-28 14:28:25
+-->
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: wang zhiguo
+ * @Date: 2020-05-04 14:02:01
+ * @LastEditors: wang zhiguo
+ * @LastEditTime: 2020-05-20 15:13:27
  -->
 <!DOCTYPE html>
 <html lang="en">
@@ -13,126 +21,232 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script>
-
-        function MyPromise(executor) {
-            // pending、fulfilled、rejected
-            var value;
-            var state = "pending";
-            var onQueue = [];
-
-            function change(s, v) {
-                if (state === "pending") {
-                    value = v;
-                    state = s;
-                    run();
-                }
-            }
-
-            function exe() {
-                while (onQueue.length) {
-                    let onObj = onQueue.shift();
-                    if (onObj[state].on) {
-                        try {
-                            let returnvalue = onObj[state].on(value);
-                            if (returnvalue instanceof MyPromise) {
-                                returnvalue.then(onObj['fulfilled'].next, onObj['rejected'].next)
-                            } else {
-                                onObj["fulfilled"].next(returnvalue);
-                            }
-                        } catch (error) {
-                            onObj['rejected'].next(error);
-                        }
-                    } else {
-                        onObj[state].next(value);
-                    }
-                }
-            }
-
-            function run(params) {
-                if (state === "pending") {
-                    return
-                }
-                if (state === "rejected" && onQueue.length === 0) {
-                    console.error("在MyPromise里，需要注册一个处理异常情况的回调函数！！！");
-                } else {
-                    setTimeout(() => {
-                        exe();
-                    }, 0);
-                }
-            }
-
-            function register(onFulfilled, onRejected) {
-                var nextPromise = new MyPromise(function (resolve, reject) {
-                    onQueue.push({
-                        fulfilled: { on: onFulfilled, next: resolve },
-                        rejected: { on: onRejected, next: reject },
-                    });
-                });
-
-                run();
-                return nextPromise;
-            }
-
-            var resolve = change.bind(this, "fulfilled");
-
-            var reject = change.bind(this, "rejected");
-
-            this.then = register.bind(this);
-
-            this.catch = register.bind(this, undefined);
-
-            try {
-                executor(resolve, reject);
-            } catch (error) {
-                reject(error);
-            }
-        };
-    </script>
+    <!-- <script src="./jsxlsx.js"></script> -->
 </head>
 
 <body>
+    <button onclick="geth()">ok</button>
+    <div id="box1" style="height: 80px; width: 300px; background: cadetblue;"></div>
+    <table id="table1" style="border:1px solid;height: 100px;overflow: hidden;" border="0" cellspacing="0" rowspan="0">
+        <tr>
+            <td colspan="3">表格题目</td>
+        </tr>
+        <tr>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>日期</td>
+        </tr>
+        <tr>
+            <td>张三</td>
+            <td>11</td>
+            <td>2020-05-20</td>
+        </tr>
+        <tr>
+            <td>李四</td>
+            <td>12</td>
+            <td>2020-05-20
+                <br>2020-05-20
+                <br>2020-05-20
+                <br>2020-05-20
+                <br>2020-05-20
+                <br>
+            </td>
+        </tr>
+    </table>
     <script>
-        let p1 = new Promise((resolve, reject) => {
-            // resolve('p1:hahaha')
-            // setTimeout(() => {
-            //     resolve('p1:hahaha')
-            // }, 2000);
-            
-            reject('yingyingying')
-        })
+        function geth(params) {
+            let th = document.getElementById('table1').clientHeight
+            console.log(th +"px")
+        }
 
-        let p2 = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve('p2:hahaha')
-            }, 3000);
-            
-            // reject('yingyingying')
-        })
+        let obj = {
+            name: 'tom',
+            _age: 23,
+            ok: true,
+            get age() {
+                console.log('get')
+                return this._age;
+            },
+            set age(value) {
+                console.log('set')
+                this._age = value;
+                return false
+            },
 
-        p2.then(value => {
-            console.log(2, value)
-        })
-        p2.then(value => {
-            console.log(2, value)
-        })
-        p2.then(value => {
-            console.log(2, value)
-        })
+        }
+        let handle = {
+            get: function (target, propKey, receiver) {
+                console.log('proxy get', propKey, receiver)
+                return Reflect.get(target, propKey)
+                // return target[propKey]
+            },
+            set: function (target, propKey, value, receiver) {
+                console.log('proxy set ***', propKey, receiver)
+                console.log('proxy set ***', propKey, Reflect.set(target, propKey, value, receiver))
+                return true
+            },
+            ownKeys: function (target) {
+                console.log('ownKeys', target)
+                return Reflect.ownKeys(target)
+            }
+        }
+        let o = new Proxy(obj, handle)
+        // console.log(o.name)
+        console.log(o.ok)
+        // console.log(Reflect.set(o,'age', 11))
+        console.log(o.ok = false)
+        console.log("___----___", obj, o)
+        // console.log(Reflect.get(o,'age',{_age: 11}))
+        // console.log(Reflect.ownKeys(o))
+        // console.log(Object.getOwnPropertyNames(o))
 
-        p1.then(value => {
-            console.log(1, value)
-        })
-        p2.then(value => {
-            console.log(2, value)
-        })
-        var ppp = p1.then(value => {
-            console.log(1, value)
-        })
+        // // 将一个sheet转成最终的excel文件的blob对象，然后利用URL.createObjectURL下载
+        // function sheet2blob(sheet, sheetName) {
+        //     sheetName = sheetName || 'sheet1';
+        //     var workbook = {
+        //         SheetNames: [sheetName],
+        //         Sheets: {}
+        //     };
+        //     workbook.Sheets[sheetName] = sheet;
+        //     // 生成excel的配置项
+        //     var wopts = {
+        //         bookType: 'xlsx', // 要生成的文件类型
+        //         bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
+        //         type: 'binary'
+        //     };
+        //     var wbout = XLSX.write(workbook, wopts);
+        //     var blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
+        //     // 字符串转ArrayBuffer
+        //     function s2ab(s) {
+        //         var buf = new ArrayBuffer(s.length);
+        //         var view = new Uint8Array(buf);
+        //         for (var i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+        //         return buf;
+        //     }
+        //     return blob;
+        // }
+        // function openDownloadDialog(url, saveName) {
+        //     if (typeof url == 'object' && url instanceof Blob) {
+        //         url = URL.createObjectURL(url); // 创建blob地址
+        //     }
+        //     var aLink = document.createElement('a');
+        //     aLink.href = url;
+        //     aLink.download = saveName || ''; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+        //     var event;
+        //     if (window.MouseEvent) event = new MouseEvent('click');
+        //     else {
+        //         event = document.createEvent('MouseEvents');
+        //         event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        //     }
+        //     aLink.dispatchEvent(event);
+        // }
+        // var aoa = [
+        //     ['姓名', '性别', '年龄', '注册时间'],
+        //     ['张三', '男', 18, new Date().toUTCString()],
+        //     ['李四', '女', 22, new Date().toUTCString()]
+        // ];
+        // var sheet = XLSX.utils.aoa_to_sheet(aoa);
+        // var tabletosheet = XLSX.utils.table_to_sheet(document.getElementById('table1'))
+        // openDownloadDialog(sheet2blob(tabletosheet), '导出.xlsx');
+        // var p = new Promise((resolve, reject) => {//这里是execurer执行函数
+        //     // xxx;
+        //     // resolve("ok1")
+        //     // reject('no')
+        // }).then(value => {
+        //     console.log(value)
+        // })
+        // new Promise((resolve, reject) => {//这里是execurer执行函数
+        //     // xxx;
+        //     resolve("ok")
+        //     // reject('no')
+        // }).then(value => {
+        //     console.log(value)
+        // }).then(()=>{
+        //     return new Promise((resolve,reject) => {
+        //         resolve('里面的p')
+        //     })
+        // }).then(value => {
+        //     console.log(value)
+        // })
+        // console.log('--------------')
+        // setTimeout(() => {
+        //     console.log("timeout")
+        // }
+        // ,0
+        // )
+        /* new Promise((resolve, reject) => {
+    // resolve('p ok')
+    reject('p err')
+}).then(value => {
+    console.log("成功1 "+value)
+    return "p1"
+}, error => {
+    console.log("失败1 "+error)
+    return "p1 err"
+}).catch(err => {
+    console.log("失败2 "+error)
+    return "p2 err"
+}).then(value => {
+    console.log("成功3 "+value)
+    return new Promise((resolve, reject) => {
+        reject("新的Promise失败了")
+    })
+}, error => {
+    console.log("失败3 "+error)
+    return "p3 err"
+}).then(value => {
+    console.log("成功4 "+value)
+}, error => {
+    console.log("失败4 "+error)
+}) */
+        // console.log("xxxxxxxxxxxxxxxxxxxxx")
+        // let p1 = new Promise((resolve, reject) => {
+        //     resolve('p1:hahaha')
+        //     // setTimeout(() => {
+        //     //     resolve('p1:hahaha')
+        //     // }, 2000);
+
+        //     reject('yingyingying')
+        // })
+
+        // let p2 = new Promise((resolve, reject) => {
+        //     setTimeout(() => {
+        //         resolve('p2:hahaha')
+        //     }, 3000);
+
+        //     // reject('yingyingying')
+        // })
+
+        // // function func(params) {
+        // //     params()
+        // // }
+        // // new func(1)
 
 
 
-        
+        // p2.then(value => {
+        //     console.log(2, value)
+        // })
+        // p2.then(value => {
+        //     console.log(2, value)
+        // })
+        // p2.then(value => {
+        //     console.log(2, value)
+        // })
+
+        // p1.then(value => {
+        //     console.log(1, value)
+        // })
+        // p2.then(value => {
+        //     console.log(2, value)
+        // })
+        // var ppp = p1.then(value => {
+        //     console.log(1, value)
+        // })
+
+
+
+
 
         // p.then(value => {
         //     return new MyPromise((resolve, reject) => {
@@ -200,9 +314,15 @@
     </script>
     <script>
         console.log('另一个script')
-        p1.catch(err => {
-            console.log(err)
-        })
+        // p.catch(err => {
+        //     console.log(err)
+        // })
+    </script>
+    <script>
+        console.log('再一个script')
+        // p.catch(err => {
+        //     console.log(err)
+        // })
     </script>
 </body>
 
