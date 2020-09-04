@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #box {
+            display: flex;
+            width: 0px;
+            height: 0px;
+            border: 1px solid;
+            flex-wrap: wrap;
+            align-content: flex-start;
+        }
+
+        #box>div {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #000;
+            color: #ccc
+        }
+    </style>
+</head>
+
+<body>
+    <input type="number" id="long" value="11" />
+    <button onclick="init()">ok</button><button onclick="go()">goooooooooo</button>
+    <div id="box"></div>
+    <div id="mapdata"></div>
+    <script>
+        let map = [];
+        let start = null;
+        let end = null;
+        let long = 0
+        init()
+        function init() {
+            long = parseInt(document.getElementById("long").value)
+
+            map = Array.apply(null, new Array(long)).map(function (v) {
+                return Array(long).fill(0)
+            })
+
+            makeMap()
+        }
+        function mlocation(target, attr) {
+            let no = Array.apply(null, box.children).indexOf(target)
+            let x = parseInt(no / long)
+            let y = no - parseInt(no / long) * long
+            // console.log(x, y, map[x][y])
+            if (map[x][y] == -1 || map[x][y] == 1 || map[x][y] == -99) {
+                attr = 'default'
+            }
+            switch (attr) {
+                case "start":
+                    map[x][y] = 1
+                    break;
+                case "end":
+                    map[x][y] = -1
+                    break;
+                case "wall":
+                    map[x][y] = -99
+                    break;
+                case "default":
+                    map[x][y] = 0
+                    break;
+                default:
+                    break;
+            }
+            // document.getElementById("mapdata").innerHTML = map.join('<br>')
+            view()
+            return [x, y]
+        }
+
+        function view() {
+            Array.apply(null, box.children).map(function (v) {
+                let no = Array.apply(null, box.children).indexOf(v)
+                let x = parseInt(no / long)
+                let y = no - parseInt(no / long) * long
+                v.innerHTML = map[x][y]
+                switch (map[x][y]) {
+                    case 1:
+                    v.style.background = "blue"
+                        break;
+                    case -1:
+                    v.style.background = "green"
+                        break;
+                    case -99:
+                    v.style.background = "#333"
+                        break;
+                    case 0:
+                    v.style.background = "#fff"
+                        break;
+
+                    default:
+                        break;
+                }
+                
+            })
+        }
+
+        function makeMap() {
+            let box = document.getElementById("box")
+            box.style.width = (long * 30) + "px"
+            box.style.height = (long * 30) + "px"
+            box.innerHTML = "";
+            start = null
+            end = null
+            for (let index = 1; index <= (long * long); index++) {
+                let a = document.createElement("div")
+                a.innerHTML = 0;
+                a.addEventListener("click", clickAMap)
+                a.addEventListener("dblclick", dblclickAMap)
+                document.getElementById("box").appendChild(a);
+            }
+        }
+
+        function clickAMap(event) {
+            let l = mlocation(event.target, "wall")
+        }
+        function dblclickAMap(event) {
+            event.target.innerHTML = 0;
+            mlocation(event.target, "default")
+            if (start == null) {
+                start = [...mlocation(event.target, "start"), event.target]
+                event.target.removeEventListener("click", clickAMap)
+            } else if (end == null) {
+                end = [...mlocation(event.target, "end"), event.target]
+                event.target.removeEventListener("click", clickAMap)
+            } else if (start != null || start != null) {
+                mlocation(start[2], "default")
+                mlocation(end[2], "default")
+                start[2].addEventListener("click", clickAMap)
+                end[2].addEventListener("click", clickAMap)
+                start = null
+                end = null
+            }
+        }
+
+
+        function go(params) {
+            if(start == null || end == null){
+                document.getElementById("mapdata").innerHTML = "双击选择起始点。必须选！"
+                return;
+            }
+            
+            ergodic([start])
+        }
+        function ergodic(stack) {
+            // console.log(stack, stack[0][0])
+            let thisNo = map[stack[0][0]][stack[0][1]] + 1
+            let stacktemp = []
+            try {
+                stack.map(function (v) {
+                let m1 = chujie( [ v[0] - 1, v[1] ] ) ? [ v[0] - 1, v[1] ] : null
+                let m2 = chujie( [ v[0], v[1] - 1 ] ) ? [ v[0], v[1] - 1 ] : null
+                let m3 = chujie( [ v[0] + 1, v[1] ] ) ? [ v[0] + 1, v[1] ] : null
+                let m4 = chujie( [ v[0], v[1] + 1 ] ) ? [ v[0], v[1] + 1 ] : null
+
+                stacktemp.push(m1, m2, m3, m4)
+            })
+            } catch (error) {
+                console.log("找到了")
+                return
+            }
+            
+            stacktemp = stacktemp.filter(function (m) {
+                if(m != null) {
+                    map[m[0]][m[1]] = thisNo
+                }
+
+                return m != null
+            })
+            // for (let i = 0; i < stacktemp.length; i++) {
+            //     map[stacktemp[i][0]][stacktemp[i][1]] = thisNo
+            // }
+
+            // console.log("temp", stacktemp)
+            ergodic(stacktemp)
+        }
+
+        function chujie(params) {
+           console.log(params, params[0] >= 0 && params[0] < long && params[1] >= 0 && params[1] < long ? map[params[0]][params[1]] : "***")
+        //    console.log(params, params[0] >= 0 && params[0] < long && params[1] >= 0 && params[1] < long && map[params[0]][params[1]] == 0)
+            // if (params[0] >= 0 && params[0] < long && params[1] >= 0 && params[1] < long) {
+            //     map[params[0]][params[1]] == -1
+            //     throw new Error("找到了")
+            // }
+           return params[0] >= 0 && params[0] < long && params[1] >= 0 && params[1] < long && map[params[0]][params[1]] == 0
+        }
+    </script>
+
+</body>
+
+</html>
