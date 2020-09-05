@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        #box {
+            display: flex;
+            width: 0px;
+            height: 0px;
+            border: 1px solid;
+            flex-wrap: wrap;
+            align-content: flex-start;
+        }
+
+        #box>div {
+            width: 28px;
+            height: 28px;
+            border: 1px solid #000;
+            color: #ccc
+        }
+    </style>
+</head>
+
+<body>
+    <input type="number" id="long" value="11" />
+    <button onclick="init()">ok</button>
+    <button onclick="go()">goooooooooo</button>
+    <div id="box"></div>
+    <div id="mapdata"></div>
+</body>
+<script>
+    let map = [],
+        long = 0,
+        start = null,
+        end = null,
+        box = null
+    init()
+    function init() {
+        long = parseInt(document.getElementById("long").value)
+        start = null
+        end = null
+
+        map = Array(long ** 2).fill(0)
+
+        creatMapView()
+    }
+    function creatMapView() {
+        box = document.getElementById("box")
+        box.style.width = (long * 30) + "px"
+        box.style.height = (long * 30) + "px"
+        box.innerHTML = "";
+        for (let index = 1; index <= (long ** 2); index++) {
+            let a = document.createElement("div")
+            a.innerHTML = 0;
+            a.addEventListener("click", clickAMap)
+            a.addEventListener("dblclick", dblclickAMap)
+            box.appendChild(a);
+        }
+    }
+
+    function clickAMap(event) {
+        view(event.target, 'wall')
+    }
+    function dblclickAMap(event) {
+        if (start == null) {
+            view(event.target, 'start')
+            event.target.removeEventListener("click", clickAMap)
+        } else if (end == null) {
+            view(event.target, 'end')
+            event.target.removeEventListener("click", clickAMap)
+        } else if (start != null && end != null) {
+            let num = Array.apply(null, box.children).indexOf(event.target)
+            if (start == num) {
+                start = null
+            } else if (end == num) {
+                end = null
+            } else {
+                return
+            }
+            view(event.target, 'default')
+            event.target.addEventListener("click", clickAMap)
+        }
+    }
+
+    function view(target, attr) {
+        let num = Array.apply(null, box.children).indexOf(target)
+
+        if (map[num] == -1 || map[num] == 1 || map[num] == -99) {
+            attr = 'default'
+        }
+        switch (attr) {
+            case "start":
+                target.style.background = "blue"
+                editMap(num, 1)
+                start = num
+                break;
+            case "end":
+                target.style.background = "green"
+                editMap(num, -1)
+                end = num
+                break;
+            case "wall":
+                target.style.background = "#333"
+                editMap(num, -99)
+                break;
+            case "default":
+                target.style.background = "#fff"
+                editMap(num, 0)
+                break;
+            default:
+                break;
+        }       
+        showNum()
+    }
+
+    function showNum() {
+        for (let index = 0; index < map.length; index++) {
+            box.children.item(index).innerHTML = map[index]
+        }
+    }
+
+    function editMap(index, value) { 
+        map[index] = value;
+    }
+
+    function go() {
+        
+    }
+</script>
+
+</html>

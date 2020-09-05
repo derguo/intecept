@@ -25,8 +25,7 @@
             height: 28px;
             border: 1px solid #000;
             color: #ccc
-        }
-    </style>
+        }</style>
 </head>
 
 <body>
@@ -112,7 +111,7 @@
             box.innerHTML = "";
             start = null
             end = null
-            for (let index = 1; index <= (long * long); index++) {
+            for (let index = 1; index <= (long**2); index++) {
                 let a = document.createElement("div")
                 a.innerHTML = 0;
                 a.addEventListener("click", clickAMap)
@@ -164,7 +163,7 @@
                 let m4 = chujie( [ v[0], v[1] + 1 ] ) ? [ v[0], v[1] + 1 ] : null
 
                 stacktemp.push(m1, m2, m3, m4)
-            })
+                })
             } catch (error) {
                 console.log("找到了")
                 return
@@ -181,17 +180,22 @@
             //     map[stacktemp[i][0]][stacktemp[i][1]] = thisNo
             // }
 
-            // console.log("temp", stacktemp)
+            console.log("temp", stacktemp)
             ergodic(stacktemp)
         }
 
+        let temp = []
+
         function chujie(params) {
-           console.log(params, params[0] >= 0 && params[0] < long && params[1] >= 0 && params[1] < long ? map[params[0]][params[1]] : "***")
+        //    console.log(params, params[0] >= 0 && params[0] < long && params[1] >= 0 && params[1] < long ? map[params[0]][params[1]] : "***")
         //    console.log(params, params[0] >= 0 && params[0] < long && params[1] >= 0 && params[1] < long && map[params[0]][params[1]] == 0)
-            // if (params[0] >= 0 && params[0] < long && params[1] >= 0 && params[1] < long) {
-            //     map[params[0]][params[1]] == -1
-            //     throw new Error("找到了")
-            // }
+            if (params[0] >= 0 && params[0] < long && params[1] >= 0 && params[1] < long) {
+                // console.log(map[params[0]][params[1]])
+                if(map[params[0]][params[1]] == -1){
+                    temp = []
+                    throw new Error("找到了")
+                }
+            }
            return params[0] >= 0 && params[0] < long && params[1] >= 0 && params[1] < long && map[params[0]][params[1]] == 0
         }
     </script>
