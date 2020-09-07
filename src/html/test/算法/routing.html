@@ -24,7 +24,8 @@
             width: 28px;
             height: 28px;
             border: 1px solid #000;
-            color: #ccc
+            color: #ccc;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -37,11 +38,14 @@
     <div id="mapdata"></div>
 </body>
 <script>
+    let b, e
     let map = [],
         long = 0,
         start = null,
         end = null,
-        box = null
+        box = null,
+        temp = []
+    let road = []
     init()
     function init() {
         long = parseInt(document.getElementById("long").value)
@@ -49,6 +53,8 @@
         end = null
 
         map = Array(long ** 2).fill(0)
+
+        temp = []
 
         creatMapView()
     }
@@ -59,7 +65,7 @@
         box.innerHTML = "";
         for (let index = 1; index <= (long ** 2); index++) {
             let a = document.createElement("div")
-            a.innerHTML = 0;
+            // a.innerHTML = 0;
             a.addEventListener("click", clickAMap)
             a.addEventListener("dblclick", dblclickAMap)
             box.appendChild(a);
@@ -71,10 +77,10 @@
     }
     function dblclickAMap(event) {
         if (start == null) {
-            view(event.target, 'start')
+            view(event.target, 'start') == end && (end = null)
             event.target.removeEventListener("click", clickAMap)
         } else if (end == null) {
-            view(event.target, 'end')
+            view(event.target, 'end') == start && (start = null)
             event.target.removeEventListener("click", clickAMap)
         } else if (start != null && end != null) {
             let num = Array.apply(null, box.children).indexOf(event.target)
@@ -99,12 +105,12 @@
         switch (attr) {
             case "start":
                 target.style.background = "blue"
-                editMap(num, 1)
+                //editMap(num, 1)
                 start = num
                 break;
             case "end":
                 target.style.background = "green"
-                editMap(num, -1)
+                //editMap(num, -1)
                 end = num
                 break;
             case "wall":
@@ -117,8 +123,9 @@
                 break;
             default:
                 break;
-        }       
+        }
         showNum()
+        return num
     }
 
     function showNum() {
@@ -127,12 +134,111 @@
         }
     }
 
-    function editMap(index, value) { 
+    function editMap(index, value) {
         map[index] = value;
     }
 
     function go() {
-        
+        b = new Date()
+        if (start == null || end == null) {
+            document.getElementById("mapdata").innerHTML = "双击选择起始点。必须选！"
+            return;
+        }
+
+        ergodic([start])
+    }
+
+    function ergodic(stack) {
+        if (stack.length == 0) {
+            console.log("不通")
+            return
+        }
+        let thisNo = map[stack[0]] + 1,
+            weizhi = [1, -1, long, -long],
+            mt = []
+        try {
+            stack.map(function (m) {
+                weizhi.map(function (wz) {
+
+                    if (bianjie(m + wz, wz)) {
+                        map[m + wz] = thisNo
+                        temp.push(m + wz)
+                        mt.push(m + wz)
+                    }
+                })
+            })
+            // showNum()
+            ergodic(mt)
+        } catch (error) {
+            console.log("找到了:", new Date() - b)
+            showNum()
+            draw(thisNo, end)
+        }
+    }
+
+    function quchong(params) {
+
+    }
+
+    function bianjie(m, wz) {
+        if (m != start && m >= 0 && m < long ** 2 && (wz < 0 ? (m + 1) % long : m % long)) {
+            if (m == end) {
+                temp = []
+                throw new Error("找到了")
+            }
+        }
+        if (temp.indexOf(m) >= 0) return false
+        return m != start &&
+            m >= 0 &&
+            m < long ** 2 &&
+            (wz < 0 ? (m + 1) % long : m % long) &&
+            map[m] == 0
+    }
+
+
+    function draw(sn, porint) {
+        // console.log("值：", sn, "坐标：", porint)
+        let weizhi = [1, -1, long, -long],
+            thenext = null
+        for (let index = 0; index < weizhi.length; index++) {
+            if (weizhi[index] + porint == start) {
+                return
+            }
+            if (map[weizhi[index] + porint] == sn) {
+                thenext = weizhi[index] + porint
+                sn--;
+                box.children.item(weizhi[index] + porint).style.background = "yellow"
+                road.push(thenext)
+                break;
+            }
+        }
+
+        draw(sn, thenext)
+    }
+
+
+
+    function draw2(porint) {
+        console.log("坐标：", porint)
+        let weizhi = [1, -1, long, -long]
+        let num = 0
+        let theNext = null
+        for (let i = 0; i < weizhi.length; i++) {
+            if (inMap(weizhi[i] + porint, weizhi[i])) {
+                if (num == 0 || map[weizhi[i] + porint] < num) {
+                    num = map[weizhi[i] + porint]
+                    theNext = weizhi[i] + porint
+                }
+            }
+        }
+
+        if (theNext == start) {
+            return
+        } else {
+            box.children.item(theNext).style.background = "yellow"
+        }
+
+        draw(theNext)
     }
 </script>
 
