@@ -1,0 +1,250 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: wang zhiguo
+ * @Date: 2020-09-14 15:50:44
+ * @LastEditors: wang zhiguo
+ * @LastEditTime: 2020-09-14 21:18:57
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="pinyin.js"></script>
+    <script src="paixu.js"></script>
+    <script>
+        var tempdata = [{
+	"phone": 18866668888,
+	"roleId": 0,
+	"loginName": "admin",
+	"name": "超级管理员",
+	"roleName": "超级管理员",
+	"active": 1,
+	"type": 0,
+	"roleType": 0,
+	"userId": 355,
+	"email": "admin@bocichina.com"
+}, {
+	"phone": 18554002816,
+	"roleId": 1,
+	"loginName": "cgc",
+	"name": "陈光川",
+	"roleName": "普通管理员",
+	"active": 1,
+	"type": 0,
+	"roleType": 1,
+	"userId": 623,
+	"email": "chenguangchuan@greattimes.com.cn"
+}, {
+	"phone": 18515618462,
+	"roleId": 1,
+	"loginName": "cxy",
+	"name": "1陈晓莹",
+	"roleName": "普通管理员",
+	"active": 1,
+	"type": 0,
+	"roleType": 1,
+	"userId": 622,
+	"email": "chenxiaoying@greattimes.com.cn"
+}, {
+	"phone": 13699291706,
+	"roleId": 1,
+	"loginName": "dzb",
+	"name": "杜宗波",
+	"roleName": "普通管理员",
+	"active": 1,
+	"type": 0,
+	"roleType": 1,
+	"userId": 628,
+	"email": "duzongbo@greatetimes.com"
+}, {
+	"phone": 13423454323,
+	"roleId": 1,
+	"loginName": "duzongbo1",
+	"name": "啊杜宗波",
+	"roleName": "普通管理员",
+	"active": 1,
+	"type": 0,
+	"roleType": 1,
+	"userId": 639,
+	"email": "gg@qq.com"
+}, {
+	"phone": 13718607232,
+	"roleId": 1,
+	"loginName": "hanyongmei",
+	"name": "中韩咏梅",
+	"roleName": "普通管理员",
+	"active": 1,
+	"type": 0,
+	"roleType": 1,
+	"userId": 621,
+	"email": "hanyongmei@greattimes.com.cn"
+}, {
+	"phone": 13718607232,
+	"roleId": 4,
+	"loginName": "hym",
+	"name": "韩咏梅",
+	"roleName": "软著专用",
+	"active": 1,
+	"type": 0,
+	"roleType": 1,
+	"userId": 630,
+	"email": "1305021134@qq.com"
+}, {
+	"phone": 18515618463,
+	"roleId": 1,
+	"loginName": "hanzhehuan",
+	"name": "韩哲焕",
+	"roleName": "普通管理员",
+	"active": 0,
+	"type": 0,
+	"roleType": 1,
+	"userId": 629,
+	"email": "123123123@163.com"
+}, {
+	"phone": 13352818218,
+	"roleId": 1,
+	"loginName": "huanghuazhan",
+	"name": "黄华湛",
+	"roleName": "普通管理员",
+	"active": 1,
+	"type": 0,
+	"roleType": 1,
+	"userId": 618,
+	"email": "huanghuazhan@greattimes.com.cn"
+}, {
+	"phone": 13644156412,
+	"roleId": 1,
+	"loginName": "jiangzhucheng",
+	"name": "姜主成",
+	"roleName": "普通管理员",
+	"active": 0,
+	"type": 0,
+	"roleType": 1,
+	"userId": 627,
+	"email": "425547027@qq.com"
+}, {
+	"phone": 17624153170,
+	"roleId": 1,
+	"loginName": "jinnange",
+	"name": "金男革",
+	"roleName": "普通管理员",
+	"active": 0,
+	"type": 0,
+	"roleType": 1,
+	"userId": 626,
+	"email": "df"
+}, {
+	"phone": 17624153170,
+	"roleId": 1,
+	"loginName": "jinnange",
+	"name": "tester",
+	"roleName": "普通管理员",
+	"active": 0,
+	"type": 0,
+	"roleType": 1,
+	"userId": 626,
+	"email": "df"
+}, {
+	"phone": 17624153170,
+	"roleId": 1,
+	"loginName": "jinnange",
+	"name": "ruanzhu",
+	"roleName": "普通管理员",
+	"active": 0,
+	"type": 0,
+	"roleType": 1,
+	"userId": 626,
+	"email": "df"
+}, {
+	"phone": 17624153170,
+	"roleId": 1,
+	"loginName": "jinnange",
+	"name": "kpi_cxy_test",
+	"roleName": "普通管理员",
+	"active": 0,
+	"type": 0,
+	"roleType": 1,
+	"userId": 626,
+	"email": "df"
+}, {
+	"phone": 17624153170,
+	"roleId": 1,
+	"loginName": "jinnange",
+	"name": "ETL",
+	"roleName": "普通管理员",
+	"active": 0,
+	"type": 0,
+	"roleType": 1,
+	"userId": 626,
+	"email": "df"
+}, {
+	"phone": 17624153170,
+	"roleId": 1,
+	"loginName": "jinnange",
+	"name": "cxy_3 测试智能分析",
+	"roleName": "普通管理员",
+	"active": 0,
+	"type": 0,
+	"roleType": 1,
+	"userId": 626,
+	"email": "df"
+}, {
+	"phone": 17624153170,
+	"roleId": 1,
+	"loginName": "jinnange",
+	"name": "bpm_cxy_2 测试智能",
+	"roleName": "普通管理员",
+	"active": 0,
+	"type": 0,
+	"roleType": 1,
+	"userId": 626,
+	"email": "df"
+}, {
+	"phone": 17624153170,
+	"roleId": 1,
+	"loginName": "jinnange",
+	"name": "aaa",
+	"roleName": "普通管理员",
+	"active": 0,
+	"type": 0,
+	"roleType": 1,
+	"userId": 626,
+	"email": "df"
+}]
+    </script>
+</head>
+
+<body>
+    <script>
+        var array = ['武汉', '北京', '上海', '上a海', '上啊', '巴蜀', 'bb', 'aa', ' 山啊', '浙江', '%山啊', '_泽啊', '山贼', '山海关', '天津', 'a0', 'a 0', '2a 0', "shiya", "san", "zadao", "zzz"];
+        console.log(array)
+
+        console.log(compare(array))
+
+        let data = []
+
+        tempdata.map((v) => {
+            data.push(v.name)
+        })
+        console.log("原来数据：",data)
+        console.log("转换数据：",compare(data))
+
+
+        
+
+
+
+
+
+
+
+        
+
+    </script>
+</body>
+
+</html>

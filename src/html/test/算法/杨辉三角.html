@@ -1,0 +1,71 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: wang zhiguo
+ * @Date: 2020-09-21 23:35:48
+ * @LastEditors: wang zhiguo
+ * @LastEditTime: 2020-09-25 11:56:06
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        printyanghui(20)
+        function printyanghui(n) {
+            let q = new Queue()
+            for (let i = 1; i <= n; i++) {
+                for (let j = 1; j < i; j++) {
+                    if (q.length() == 0) {
+                        q.enqueue(j)
+                    } else if (j != 1) {
+                        q.enqueue(q.dequeue() + q.item(0))
+                    }
+                }
+                q.enqueue(1)
+                console.log(q.join(" "))
+            }
+        }
+
+        function Queue(params) {
+            let items = new Array()
+            this.enqueue = function (v) {
+                items.push(v)
+                return v
+            }
+
+            this.dequeue = function () {
+                return items.shift()
+            }
+
+            this.length = function () {
+                return items.length
+            }
+
+            this.item = function (i) {
+                return items[i]
+            }
+
+            this.join = function (params) {
+                return items.join(params)
+            }
+        }
+
+        var s = new Map([['Michael', 95], ['Bob', 75], ['Tracy', 85]]);
+        console.log(s?.set)
+        
+        s.forEach(function (element, sameElement, set) {
+            console.log(element,sameElement, set);
+        });
+        
+
+    </script>
+</body>
+
+</html>

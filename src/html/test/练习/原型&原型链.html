@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: wang zhiguo
+ * @Date: 2019-11-01 22:53:16
+ * @LastEditors: wang zhiguo
+ * @LastEditTime: 2020-06-20 20:32:28
+--> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,9 +16,23 @@
   </head>
   <body>
     <script>
-      function add() {
-        
+      var obj = {
+        fullname() {
+          return this.fname + this.lname
+        }
       }
+      function add() {
+        this.fname = "tome"
+        this.lname = "green"
+        this.age = 22
+        console.log(add.prototype)
+        return add.prototype.fullname.bind(this)
+      }
+      add.prototype.fullname = function() {
+        return this.fname + this.lname
+      }
+
+      console.log(new add()())
       console.log(Function.prototype.__proto__);
       console.log(Object.prototype.constructor);
       console.log(add.__proto__)

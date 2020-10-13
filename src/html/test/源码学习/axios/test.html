@@ -1,0 +1,143 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: wang zhiguo
+ * @Date: 2020-06-08 16:44:54
+ * @LastEditors: wang zhiguo
+ * @LastEditTime: 2020-06-25 18:54:55
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.min.js"></script>
+</head>
+
+<body>
+    <script>
+        // o.send()
+        // let p = Promise.resolve({})
+        // p.then(config => {
+        //     aaa
+        //     console.log('1', config)
+
+        //     // 在发送http请求之前做些什么
+        //     return config; // 有且必须有一个config对象被返回
+        // }, error => {
+        //     // 对请求错误做些什么
+        //     console.log('error')
+        //     return Promise.reject(error);
+        // }).then(config => {
+        //     console.log('2', config)
+
+        //     // 在发送http请求之前做些什么
+        //     return config; // 有且必须有一个config对象被返回
+        // }, undefined).then(config => {
+        //     console.log('3', config)
+
+        //     // 在发送http请求之前做些什么
+        //     return config; // 有且必须有一个config对象被返回
+        // }, error => {
+        //     // 对请求错误做些什么
+        //     console.log('error3')
+        //     return Promise.reject(error);
+        // })
+
+        const CancelToken = axios.CancelToken;
+        const source = CancelToken.source();
+
+
+        axios.interceptors.request.use(config => {
+            console.log('1', config)
+
+            // 在发送http请求之前做些什么
+            return config; // 有且必须有一个config对象被返回
+        }, error => {
+            // 对请求错误做些什么
+            console.log('1error')
+            return Promise.reject(error);
+        });
+        axios.interceptors.request.use(config => {
+            // aa
+            console.log('2', config)
+            // 在发送http请求之前做些什么
+            return config; // 有且必须有一个config对象被返回
+        }, error => {
+            // 对请求错误做些什么
+            console.log('2error')
+            return Promise.reject(error);
+        });
+
+        // 添加响应拦截器
+        axios.interceptors.response.use(response => {
+            // 对响应数据做点什么
+            return response; // 有且必须有一个response对象被返回
+        }, error => {
+            // 对响应错误做点什么
+            console.log('response error1')
+            return Promise.reject(error);
+        });
+        // 添加响应拦截器
+        axios.interceptors.response.use(response => {
+            // 对响应数据做点什么
+            return response; // 有且必须有一个response对象被返回
+        }, error => {
+            // 对响应错误做点什么
+            console.log('response error2')
+            return Promise.reject(error);
+        });
+
+
+        // axios.get('http://xxx.com')
+        axios('http://baidu.com', {
+            method: "get",
+            cancelToken: source.token,
+            transformRequest: [
+                ...axios.defaults.transformRequest,
+                (data, headers) => {
+                    source.cancel("停止请求")
+                    return data;
+                }
+            ]
+        }).catch(err => {
+            console.log(err)
+        })
+        console.log("ok")
+        var xhr = new XMLHttpRequest(),
+            method = "GET",
+            url = "https://developer.mozilla.org/";
+        xhr.open(method, url, true);
+        xhr.onabort = function handleAbort() {
+            console.log("取消了")
+        }
+
+        xhr.send();
+
+        xhr.abort()
+
+        console.log('===========');
+        var a = new Proxy({n: 1},{
+            get(t, k, r){
+                console.log('get',t)
+            },
+            set(){
+                console.log('set')
+            }
+        })
+        // var a = { n: 1 }
+        var b = a
+        a.x = a = { n: 2 }
+
+        // console.log(a);
+        // console.log(b);
+        // console.log(a.n, b.n);
+        // console.log(a.x, b.x);
+
+        console.log('===========');
+    </script>
+</body>
+
+</html>

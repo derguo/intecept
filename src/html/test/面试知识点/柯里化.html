@@ -1,3 +1,11 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: wang zhiguo
+ * @Date: 2019-11-11 21:40:26
+ * @LastEditors: wang zhiguo
+ * @LastEditTime: 2020-07-01 18:33:58
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,29 +18,68 @@
 
 <body>
     <script>
-        function toCurry(func, args) {
-            args = args || [];
-            return function (...params) {
-                console.log(args, params);
-                let _args = [...args,...params];
+        function toCurry(func, ...args) {
+            if (!func instanceof Function) throw TypeError();
 
-                if (_args.length < func.length) {
-                    return toCurry(func, [..._args]);
+            Object.defineProperty(curry,'length',{
+                get:function () {
+                    return func.length - args.length
+                }
+            })
+
+            curry.rest = curry.length > 0;
+            
+            function curry() {
+                args = [...args, ...arguments];
+
+                if (args.length < func.length) {
+                    return toCurry(func, ...args);
                 } else {
-                    return func.apply(null, _args);
+                    return func.apply(this, args);
+                }
+            }
+
+            return curry.rest ? curry : curry()
+        }
+
+        Function.prototype.toCurry = function (...args) {
+            // console.log("xxx", this.apply(null, args))
+            return toCurry(this, ...args)
+        }
+
+        function bar(a, b, c, d, e, f = 6) {
+            // 'use strict';
+            // arguments[0] = 111
+            // console.log("bar this:", this, a, bar.caller)
+            console.log(arguments,f,bar.length)
+            return a + b + c;
+        }
+        bar.length = 111;
+
+        var o = {
+            d: 1,
+            bar: bar.toCurry(1,1),
+            f: function name(params) {
+                console.log(this)
+                return function (params) {
+                    console.log(this)
                 }
             }
         }
 
-        function bar(a, b, c) {
-            return a + b + c;
-        }
+        console.log("bar", o.bar(1), bar.length)
 
-        var f = toCurry(bar)
+        bar()
 
-        console.log(f(1)(2)(3));
-        console.log(f(1)(2, 3));
-        console.log(f(1, 2)(3));
+        // o.f()()
+
+        // var f = toCurry(bar)
+
+        // console.log(f(1)(2)(3));
+        // console.log(f(1)(2, 3));
+        // console.log(f(1, 2)(3));
+
+
 
     </script>
 </body>
