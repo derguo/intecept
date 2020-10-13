@@ -48,6 +48,7 @@
 
             makeMap()
         }
+        // .......
         function mlocation(target, attr) {
             let no = Array.apply(null, box.children).indexOf(target)
             let x = parseInt(no / long)
@@ -76,6 +77,7 @@
             view()
             return [x, y]
         }
+        //渲染方法 有待于改善123
         function view() {
             Array.apply(null, box.children).map(function (v) {
                 let no = Array.apply(null, box.children).indexOf(v)
