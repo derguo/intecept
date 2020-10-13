@@ -39,7 +39,6 @@
         let end = null;
         let long = 0
         init()
-        //开始方法，还行...
         function init() {
             long = parseInt(document.getElementById("long").value)
 
@@ -77,7 +76,6 @@
             view()
             return [x, y]
         }
-        //渲染方法 有待于改善
         function view() {
             Array.apply(null, box.children).map(function (v) {
                 let no = Array.apply(null, box.children).indexOf(v)
