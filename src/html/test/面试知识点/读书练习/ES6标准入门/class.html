@@ -4,7 +4,7 @@
  * @Author: wang zhiguo
  * @Date: 2020-10-07 16:40:03
  * @LastEditors: wang zhiguo
- * @LastEditTime: 2020-10-07 18:16:40
+ * @LastEditTime: 2020-10-25 15:13:30
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -15,18 +15,154 @@
 </head>
 <body>
     <script>
-        class My{
-            constructor(){
-                console.log("ok")
-            }
+        // let f = function func(params) {
+            
+        // }
+        // //func()//报错
+        // let mc = class Myclass{}
+        // // new Myclass()//报错
+        // class My{
+        //     xxx = 111;
+        //     constructor(){
+        //         // console.log("ok")
+        //         this.balabala = "b"
+        //     }
 
-            age() {
+        //     age() {
                 
+        //     }
+        // }
+
+        // let obj = {
+        //     f:1111,
+        //     test(){
+        //         console.log("xxxxxxxxxxxx",f,this)
+        //     },
+        //     t1 : () => {
+        //         return () =>{console.log("xxxxxxxxxxxx1",this)}
+                
+        //     }
+        // }
+
+        // function ttt(params) {
+        //     console.log("xxxxxxxxxxxx",f)
+        // }
+
+        // var m = new My()
+        // m.sex = "boy"
+        // console.log(Object.getOwnPropertyNames(new My()))
+        // console.log(Object.getOwnPropertyNames(m))
+        // console.log(Object.keys(m))
+        // console.log(Object.getOwnPropertyDescriptor(new My(), "sex"))
+        // for(i in new My()){
+        //     console.log(i)
+        // }
+        // console.log()
+
+        // class childen extends My{
+        //     age1 = 22;
+        //     constructor(){
+        //         console.log("调用super", super())
+        //     }
+            
+        // }
+
+        // console.log(Object.getOwnPropertyNames(new childen()))
+
+        // class A{
+        //     constructor(){
+        //         this.x = 1
+        //     }
+        // }
+
+        // class B extends A{
+        //     constructor(){
+        //         super();
+        //         super.x = 3;
+        //         console.log(this.x)
+        //         console.log(super.x)
+        //     }
+        //     get [Symbol.toStringTag](){
+        //         return 'B'
+        //     }
+        //     test(){
+        //         console.log("xxxxxxxxxxxx",f)
+        //     }
+        // }
+        // new B().test()
+        // console.log(Object.prototype.toString.call(new B()))
+        // console.log(new B().toString)
+        // console.log("对象的原型",new B().prototype)
+        // function func(params) {
+            
+        // }
+
+        // console.log(new func().__proto__);
+        // console.log(func.__proto__)
+        // console.log(Object.__proto__)
+        // console.log(func.__proto__ == Function.__proto__)
+
+        // function funccc(params) {
+        //     let f = 1
+        //     return function (params) {
+            
+        //     new B().test()
+        //     obj.test()
+        //     ttt()
+        //     obj.t1()()
+        //     f
+        // }
+        // }
+        
+        // let fff = funccc()
+        // fff()
+
+        // console.log(Object.getOwnPropertyNames(obj))
+
+        var a = "global"
+        // var obj = {
+        //         test:function(){
+        //             console.log(a)
+        //         }
+        //     }
+        // function f(params) {
+        //     var a = "f"
+        //     obj.test()
+        // }
+
+        function f(params) {
+            // var a = "f"
+            var obj = {
+                test:function(){
+                    console.log(a)
+                    // console.log(b)
+                }
             }
+            class my{
+                test(){}
+            }
+            console.log(Object.getOwnPropertyNames(new my().__proto__))
+            console.log(Object.getOwnPropertyNames(obj.__proto__))
+            function ff(params) {
+                var a = "ff"
+                var b = 'bb'
+                obj.test()
+                obj.test1 = function (params) {
+                    console.log(a)
+                }
+                fff()
+            }
+            function fff(params) {
+                console.log(a)
+                    console.log(b)
+            }
+            ff()
+            return obj
         }
 
-        new My()
-        console.log(Object.getOwnPropertyNames(new My()))
+        let o = f()//f
+        o.test1()
+        
     </script>
 </body>
 </html>
