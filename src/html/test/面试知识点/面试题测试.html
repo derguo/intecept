@@ -1,0 +1,59 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: wang zhiguo
+ * @Date: 2020-10-22 13:09:43
+ * @LastEditors: wang zhiguo
+ * @LastEditTime: 2020-10-22 16:41:41
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = {
+            value: 1,
+            valueOf() {
+                return this.value++
+            }
+        }
+        if (a == 1 && a == 2 && a == 3) {
+            console.log("ok", 1)
+        }
+
+        var data = [{ "expand": true, "id": 8, "check": false, "title": "nj_test", "type": "application", "nodeKey": 0, "children": [{ "expand": false, "children": [{ "expand": false, "indicatorType": 1, "children": [{ "checkall": false, "expand": false, "children": [{ "expand": false, "id": 157, "check": false, "title": "127.0.0.1", "type": "ip", "parentId": 4615444, "key": 1, "nodeKey": 4 }, { "expand": false, "id": 158, "check": false, "title": "127.0.0.2", "type": "ip", "parentId": 4615444, "key": 1, "nodeKey": 5 }], "indeterminate": false, "id": 4615444, "check": false, "title": "IP", "type": "ipList", "parentId": 50, "nodeKey": 3 }], "id": 50, "check": false, "title": "组件A", "type": "component", "statisticalMode": 2, "parentId": 9, "key": 0, "nodeKey": 2 }, { "expand": false, "indicatorType": 1, "children": [{ "checkall": false, "expand": false, "children": [{ "expand": false, "id": 153, "check": false, "title": "127.0.0.1", "type": "ip", "parentId": 4615445, "key": 1, "nodeKey": 8 }, { "expand": false, "id": 154, "check": false, "title": "127.0.0.2", "type": "ip", "parentId": 4615445, "key": 1, "nodeKey": 9 }], "indeterminate": false, "id": 4615445, "check": false, "title": "IP", "type": "ipList", "parentId": 61, "nodeKey": 7 }], "id": 61, "check": false, "title": "组件Dx", "type": "component", "statisticalMode": 2, "parentId": 9, "key": 0, "nodeKey": 6 }, { "expand": false, "indicatorType": 1, "children": [{ "checkall": false, "expand": false, "children": [{ "expand": false, "id": 175, "check": false, "title": "1.3.3.4", "type": "ip", "parentId": 4615446, "key": 1, "nodeKey": 12 }], "indeterminate": false, "id": 4615446, "check": false, "title": "IP", "type": "ipList", "parentId": 63, "nodeKey": 11 }], "id": 63, "check": false, "title": "测试111", "type": "component", "statisticalMode": 2, "parentId": 9, "key": 0, "nodeKey": 10 }, { "expand": false, "indicatorType": 1, "children": [{ "checkall": false, "expand": false, "children": [], "indeterminate": false, "id": 4615447, "check": false, "title": "IP", "type": "ipList", "parentId": 64, "nodeKey": 14 }], "id": 64, "check": false, "title": "1234", "type": "component", "statisticalMode": 2, "parentId": 9, "key": 0, "nodeKey": 13 }], "name": "monitorA", "id": 9, "check": false, "title": "monitorA", "type": "monitor", "parentId": 8, "nodeKey": 1 }, { "expand": false, "name": "moniotrB", "id": 10, "check": false, "title": "moniotrB", "type": "monitor", "parentId": 8, "nodeKey": 15 }] }, { "expand": false, "id": 6, "check": false, "title": "测试应用-hym", "type": "application", "nodeKey": 16 }, { "expand": false, "id": 11, "check": false, "title": "test-cgc", "type": "application", "nodeKey": 17 }, { "expand": false, "id": 7, "check": false, "title": "测试应用-dzb", "type": "application", "nodeKey": 18 }, { "expand": false, "id": 2, "check": false, "title": "cxy_test_application", "type": "application", "nodeKey": 19 }, { "expand": false, "id": 4615223, "check": false, "title": "test-admin", "type": "application", "nodeKey": 20 }, { "expand": false, "id": 4615265, "check": false, "title": "test_cgc", "type": "application", "nodeKey": 21 }, { "expand": false, "id": 10, "check": false, "title": "测试应用-hym-2", "type": "application", "nodeKey": 22 }]
+
+        function getParentId1(tree, id) {
+            let r = 0;
+            if (tree) {
+                tree.every(it => {//在foreach里用return相当于continue
+                //要起到break的作用可以用every里返回return false的形式即可
+                    console.log(it.id, id)
+                    if (it.id == id) {
+                        console.log(it.parentId)
+                        r = it.parentId;
+                        return false;//在这里找到了id 赋值之后break
+                    } else if(it.children) {
+                        r = getParentId1(it.children, id);//在这里获取递归内部返回的值，逐层返回
+                        if (r == 0 )return true
+                    }else{
+                        return true;
+                    }
+                });
+
+            }
+            return r//到这里才能获取递归内部找到的东西
+        }
+
+        console.log("结果", getParentId1(data,157))
+
+    </script>
+</body>
+
+</html>
